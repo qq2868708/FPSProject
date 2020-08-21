@@ -8,4 +8,5 @@ public static class InputSettings
     public static string Ver = "Vertical";
     public static KeyCode Jump = KeyCode.Space;
     public static KeyCode Sprint = KeyCode.LeftShift;
+    public static KeyCode Crouched = KeyCode.C;
 }
