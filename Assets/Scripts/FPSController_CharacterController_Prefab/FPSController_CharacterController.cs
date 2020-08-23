@@ -12,7 +12,7 @@ public class FPSController_CharacterController : MonoBehaviour
     //下蹲状态记录
     private bool isCrouched=false;
     private float standHeight;
-    private float crouchedHeight;
+    public float crouchedHeight;
 
     //重力
     public float gravity;
@@ -21,28 +21,33 @@ public class FPSController_CharacterController : MonoBehaviour
     public float jumpHeight;
 
     public float sprintSpeed;
+    public float crouchedSprint;
     public float walkSpeed;
+    public float crouchedWalk;
 
     //记录前一帧的状态参量
     private float lastSpeed;
     private float hor;
     private float ver;
-    private float Jump;
+    private float jump;
     private Vector3 lastMoveDir;
+
+    //动画机
+    private FPSAnimatorController animatorController;
 
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
         player = this.transform;
         standHeight = characterController.height;
-        crouchedHeight = 1;
+        animatorController=GetComponentInChildren<FPSAnimatorController>();
     }
 
     private void Update()
     {
         if (characterController.isGrounded)
         {
-            Jump = 0;
+            jump = 0;
             moveDir.y = -1;
             hor = Input.GetAxis(InputSettings.Hor);
             ver = Input.GetAxis(InputSettings.Ver);
@@ -56,18 +61,47 @@ public class FPSController_CharacterController : MonoBehaviour
             //自带重力算法
             //characterController.SimpleMove(tmp_MoveDir * Time.deltaTime * MoveSpeed);
             //Debug.Log(moveDir);
+
+            //蹲下时不允许起跳
             if (Input.GetKey(InputSettings.Jump)&&!isCrouched)
             {
-                Jump = Mathf.Sqrt(2 * gravity * jumpHeight);
-                Debug.Log("jump"+moveDir);
+                jump = Mathf.Sqrt(2 * gravity * jumpHeight);
             }
-            if (Input.GetKeyDown(InputSettings.Sprint))
+
+            
+
+            //蹲下时有不同的移动速度
+            if (Input.GetKey(InputSettings.Sprint))
             {
-                lastSpeed = sprintSpeed;
+                if(isCrouched)
+                {
+                    lastSpeed = crouchedSprint;
+                }
+                else
+                {
+                    animatorController.PlayAnimation(AnimationSettings.run);
+                    lastSpeed = sprintSpeed;
+                }
+               
             }
             else
             {
-                lastSpeed = walkSpeed;
+                if (isCrouched)
+                {
+                    lastSpeed = crouchedWalk;
+                }
+                else
+                {
+                    animatorController.PlayAnimation(AnimationSettings.walk);
+                    lastSpeed = walkSpeed;
+                }
+                
+            }
+
+            //如果没有移动幅度太小，则判断为站立不动，动画效果可以使用一个速度变量来进行控制，配合blendtree可以达到更好的效果，但是觉得如果使用速度来控制的话在实际操作的时候不方便对移动速度的数值进行修改了
+            if (new Vector2(moveDir.x, moveDir.y).magnitude < 0.1f)
+            {
+                animatorController.PlayAnimation(AnimationSettings.idle);
             }
 
             //实现下蹲的方法，同时模型坐标不变，不会陷进地面而导致动画出现问题
@@ -108,8 +142,8 @@ public class FPSController_CharacterController : MonoBehaviour
 
         moveDir = lastMoveDir * lastSpeed * Time.deltaTime;
        
-        Jump-= gravity * Time.deltaTime;
-        moveDir.y =Jump;
+        jump-= gravity * Time.deltaTime;
+        moveDir.y =jump;
         characterController.Move(moveDir);
     }
 
@@ -123,8 +157,8 @@ public class FPSController_CharacterController : MonoBehaviour
         {
             yield return null;
             characterController.height = Mathf.Lerp(characterController.height, targetHeight, 0.5f);
-            characterController.center=new Vector3(0, Mathf.Lerp(characterController.center.y,tmp_height,0.5f), 0);
-            //characterController.center=new Vector3(0, 0.5f, 0);
+            //下面这行会使得模型的位置保持不变，对于拥有完整模型的场合，可以导致双脚稳稳站在地上，对于仅拥有手臂而没有站立动画的场合，请注释
+            //characterController.center=new Vector3(0, Mathf.Lerp(characterController.center.y,tmp_height,0.5f), 0);
         }
     }
 }
