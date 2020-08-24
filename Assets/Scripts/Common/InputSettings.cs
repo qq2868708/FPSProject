@@ -9,4 +9,5 @@ public static class InputSettings
     public static KeyCode Jump = KeyCode.Space;
     public static KeyCode Sprint = KeyCode.LeftShift;
     public static KeyCode Crouched = KeyCode.C;
+    public static KeyCode Reload = KeyCode.R;
 }

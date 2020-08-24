@@ -13,6 +13,7 @@ public static class AnimationSettings
     public static string idleClip = "idle@assault_rifle_01";
     public static string walkClip = "walk@assault_rifle_01";
     public static string runClip = "run@assault_rifle_01";
+    public static string shootClip = "fire@assault_rifle_01 0";
 
     public static Dictionary<string ,string> Dic = new Dictionary<string, string>();
 
