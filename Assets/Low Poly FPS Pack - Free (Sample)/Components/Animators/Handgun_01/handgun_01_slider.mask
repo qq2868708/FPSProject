@@ -11,7 +11,7 @@ AvatarMask:
   - m_Path: 
     m_Weight: 1
   - m_Path: Armature
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/arm_L
     m_Weight: 0
   - m_Path: Armature/arm_L/lower_arm_L
@@ -85,6 +85,12 @@ AvatarMask:
   - m_Path: arms/handgun_01/bullet
     m_Weight: 0
   - m_Path: arms/handgun_01/handgun_01_iron_sights
+    m_Weight: 0
+  - m_Path: arms/handgun_01/scope_02
+    m_Weight: 0
+  - m_Path: arms/handgun_01/scope_03
+    m_Weight: 0
+  - m_Path: arms/handgun_01/silencer
     m_Weight: 0
   - m_Path: arms/knife 1
     m_Weight: 0

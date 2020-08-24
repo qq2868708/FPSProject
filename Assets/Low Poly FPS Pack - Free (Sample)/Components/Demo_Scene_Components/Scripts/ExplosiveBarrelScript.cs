@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// ----- Low Poly FPS Pack Free Version -----
 public class ExplosiveBarrelScript : MonoBehaviour {
 
 	float randomTime;
@@ -76,6 +75,14 @@ public class ExplosiveBarrelScript : MonoBehaviour {
 				//Toggle the isHit bool on the target object
 				hit.transform.gameObject.GetComponent<TargetScript>().isHit = true;
 			}
+
+			//If the explosion hit the tag "GasTank"
+			if (hit.GetComponent<Collider>().tag == "GasTank") 
+			{
+				//If gas tank is within radius, explode it
+				hit.gameObject.GetComponent<GasTankScript> ().isHit = true;
+				hit.gameObject.GetComponent<GasTankScript> ().explosionTimer = 0.05f;
+			}
 		}
 
 		//Raycast downwards to check the ground tag
@@ -91,4 +98,3 @@ public class ExplosiveBarrelScript : MonoBehaviour {
 		Destroy (gameObject);
 	}
 }
-// ----- Low Poly FPS Pack Free Version -----

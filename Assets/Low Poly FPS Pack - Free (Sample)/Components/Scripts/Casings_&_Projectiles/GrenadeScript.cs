@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// ----- Low Poly FPS Pack Free Version -----
 public class GrenadeScript : MonoBehaviour {
 
 	[Header("Timer")]
@@ -102,10 +101,18 @@ public class GrenadeScript : MonoBehaviour {
 				//Toggle "explode" on explosive barrel object
 				hit.gameObject.GetComponent<ExplosiveBarrelScript> ().explode = true;
 			}
+
+			//If the explosion hits "GasTank" tag
+			if (hit.GetComponent<Collider>().tag == "GasTank") 
+			{
+				//Toggle "isHit" on gas tank object
+				hit.gameObject.GetComponent<GasTankScript> ().isHit = true;
+				//Reduce explosion timer on gas tank object to make it explode faster
+				hit.gameObject.GetComponent<GasTankScript> ().explosionTimer = 0.05f;
+			}
 		}
 
 		//Destroy the grenade object on explosion
 		Destroy (gameObject);
 	}
 }
-// ----- Low Poly FPS Pack Free Version -----

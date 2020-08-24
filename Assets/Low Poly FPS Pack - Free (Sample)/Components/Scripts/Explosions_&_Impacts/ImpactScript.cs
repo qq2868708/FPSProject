@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// ----- Low Poly FPS Pack Free Version -----
 public class ImpactScript : MonoBehaviour {
 
 	[Header("Impact Despawn Timer")]
@@ -30,4 +29,3 @@ public class ImpactScript : MonoBehaviour {
 		Destroy (gameObject);
 	}
 }
-// ----- Low Poly FPS Pack Free Version -----

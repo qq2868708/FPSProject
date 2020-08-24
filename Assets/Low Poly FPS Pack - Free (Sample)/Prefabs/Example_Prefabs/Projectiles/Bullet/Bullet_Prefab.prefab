@@ -113,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1086664671600574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.09}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.025}
   m_Children:
   - {fileID: 4931387532149536}
@@ -215,7 +215,7 @@ TrailRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: de40215ad721f914fa9e82157e40b696, type: 2}
+  - {fileID: 2100000, guid: 8adeec65686b8f2418219361b43c1f59, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -343,8 +343,14 @@ MonoBehaviour:
   destroyOnImpact: 1
   minDestroyTime: 0.01
   maxDestroyTime: 0.05
+  bloodImpactPrefabs:
+  - {fileID: 4418440862474872, guid: a845e59c374ae0240812749e46f13033, type: 2}
   metalImpactPrefabs:
   - {fileID: 4458509032938956, guid: 79927c6543a058b4383885fac101fe2e, type: 2}
+  dirtImpactPrefabs:
+  - {fileID: 4522298916909980, guid: 7178009a59b47d44385e833bda688e76, type: 2}
+  concreteImpactPrefabs:
+  - {fileID: 4587651611338842, guid: 5e02303289b3c494e8e185be0fbbd405, type: 2}
 --- !u!198 &198974215115052992
 ParticleSystem:
   m_ObjectHideFlags: 1

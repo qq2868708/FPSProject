@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// ----- Low Poly FPS Pack Free Version -----
 public class LookAtCamera : MonoBehaviour {
 
 	private void Start () 
@@ -18,4 +17,3 @@ public class LookAtCamera : MonoBehaviour {
 		transform.LookAt (Camera.main.transform);
 	}
 }
-// ----- Low Poly FPS Pack Free Version -----

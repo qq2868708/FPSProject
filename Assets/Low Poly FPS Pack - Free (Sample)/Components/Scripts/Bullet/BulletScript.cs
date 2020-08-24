@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// ----- Low Poly FPS Pack Free Version -----
 public class BulletScript : MonoBehaviour {
 
 	[Range(5, 100)]
@@ -15,7 +14,10 @@ public class BulletScript : MonoBehaviour {
 	public float maxDestroyTime;
 
 	[Header("Impact Effect Prefabs")]
+	public Transform [] bloodImpactPrefabs;
 	public Transform [] metalImpactPrefabs;
+	public Transform [] dirtImpactPrefabs;
+	public Transform []	concreteImpactPrefabs;
 
 	private void Start () 
 	{
@@ -38,12 +40,57 @@ public class BulletScript : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
+		//Ignore collision if bullet collides with "Player" tag
+		if (collision.gameObject.tag == "Player") 
+		{
+			//Physics.IgnoreCollision (collision.collider);
+			Debug.LogWarning("Collides with player");
+			//Physics.IgnoreCollision(GetComponent<Collider>(), GetComponent<Collider>());
+
+
+			Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+
+		}
+
+		//If bullet collides with "Blood" tag
+		if (collision.transform.tag == "Blood") 
+		{
+			//Instantiate random impact prefab from array
+			Instantiate (bloodImpactPrefabs [Random.Range 
+				(0, bloodImpactPrefabs.Length)], transform.position, 
+				Quaternion.LookRotation (collision.contacts [0].normal));
+			//Destroy bullet object
+			Destroy(gameObject);
+		}
+
 		//If bullet collides with "Metal" tag
 		if (collision.transform.tag == "Metal") 
 		{
 			//Instantiate random impact prefab from array
 			Instantiate (metalImpactPrefabs [Random.Range 
-				(0, metalImpactPrefabs.Length)], transform.position, 
+				(0, bloodImpactPrefabs.Length)], transform.position, 
+				Quaternion.LookRotation (collision.contacts [0].normal));
+			//Destroy bullet object
+			Destroy(gameObject);
+		}
+
+		//If bullet collides with "Dirt" tag
+		if (collision.transform.tag == "Dirt") 
+		{
+			//Instantiate random impact prefab from array
+			Instantiate (dirtImpactPrefabs [Random.Range 
+				(0, bloodImpactPrefabs.Length)], transform.position, 
+				Quaternion.LookRotation (collision.contacts [0].normal));
+			//Destroy bullet object
+			Destroy(gameObject);
+		}
+
+		//If bullet collides with "Concrete" tag
+		if (collision.transform.tag == "Concrete") 
+		{
+			//Instantiate random impact prefab from array
+			Instantiate (concreteImpactPrefabs [Random.Range 
+				(0, bloodImpactPrefabs.Length)], transform.position, 
 				Quaternion.LookRotation (collision.contacts [0].normal));
 			//Destroy bullet object
 			Destroy(gameObject);
@@ -68,6 +115,16 @@ public class BulletScript : MonoBehaviour {
 			//Destroy bullet object
 			Destroy(gameObject);
 		}
+
+		//If bullet collides with "GasTank" tag
+		if (collision.transform.tag == "GasTank") 
+		{
+			//Toggle "isHit" on gas tank object
+			collision.transform.gameObject.GetComponent
+				<GasTankScript> ().isHit = true;
+			//Destroy bullet object
+			Destroy(gameObject);
+		}
 	}
 
 	private IEnumerator DestroyTimer () 
@@ -87,4 +144,3 @@ public class BulletScript : MonoBehaviour {
 		Destroy (gameObject);
 	}
 }
-// ----- Low Poly FPS Pack Free Version -----

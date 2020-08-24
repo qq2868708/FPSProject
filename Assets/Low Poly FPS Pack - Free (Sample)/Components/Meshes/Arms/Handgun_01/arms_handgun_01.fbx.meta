@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 56ec0b9a5b8762642811ea26a5242e04
-timeCreated: 1556105802
+timeCreated: 1553025820
 licenseType: Store
 ModelImporter:
   serializedVersion: 21
@@ -160,7 +160,7 @@ ModelImporter:
     clipAnimations:
     - serializedVersion: 16
       name: aim_fire@handgun_01
-      takeName: Armature|aim_fire@handgun_01
+      takeName: Armature|aim_fire
       firstFrame: 1
       lastFrame: 6
       wrapMode: 0
@@ -188,7 +188,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: aim_fire_pose@handgun_01
-      takeName: Armature|aim_fire_pose@handgun_01
+      takeName: Armature|aim_fire_pose
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -215,8 +215,176 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
+      name: aim_fire_pose_scope_02@handgun_01
+      takeName: Armature|aim_fire_pose_scope_02
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: aim_fire_pose_scope_03@handgun_01
+      takeName: Armature|aim_fire_pose_scope_03
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: aim_fire_scope_02@handgun_01
+      takeName: Armature|aim_fire_scope_02
+      firstFrame: 1
+      lastFrame: 6
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: aim_fire_scope_03@handgun_01
+      takeName: Armature|aim_fire_scope_03
+      firstFrame: 1
+      lastFrame: 6
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
       name: aim_in@handgun_01
-      takeName: Armature|aim_in@handgun_01
+      takeName: Armature|aim_in
+      firstFrame: 1
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: aim_in_scope_02@handgun_01
+      takeName: Armature|aim_in_scope_02
+      firstFrame: 1
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: aim_in_scope_03@handgun_01
+      takeName: Armature|aim_in_scope_03
       firstFrame: 1
       lastFrame: 10
       wrapMode: 0
@@ -244,7 +412,63 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: aim_out@handgun_01
-      takeName: Armature|aim_out@handgun_01
+      takeName: Armature|aim_out
+      firstFrame: 1
+      lastFrame: 12
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: aim_out_scope_02@handgun_01
+      takeName: Armature|aim_out_scope_02
+      firstFrame: 1
+      lastFrame: 12
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: aim_out_scope_03@handgun_01
+      takeName: Armature|aim_out_scope_03
       firstFrame: 1
       lastFrame: 12
       wrapMode: 0
@@ -272,7 +496,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: fire@handgun_01
-      takeName: Armature|fire@handgun_01
+      takeName: Armature|fire
       firstFrame: 1
       lastFrame: 16
       wrapMode: 0
@@ -300,7 +524,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: grenade_throw@handgun_01
-      takeName: Armature|grenade_throw@handgun_01
+      takeName: Armature|grenade_throw
       firstFrame: 1
       lastFrame: 35
       wrapMode: 0
@@ -328,7 +552,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: holster_weapon@handgun_01
-      takeName: Armature|holster_weapon@handgun_01
+      takeName: Armature|holster_weapon
       firstFrame: 1
       lastFrame: 13
       wrapMode: 0
@@ -356,7 +580,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: idle@handgun_01
-      takeName: Armature|_idle@handgun_01
+      takeName: Armature|idle
       firstFrame: 1
       lastFrame: 180
       wrapMode: 0
@@ -384,7 +608,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: inspect_weapon@handgun_01
-      takeName: Armature|inspect_weapon@handgun_01
+      takeName: Armature|inspect_weapon
       firstFrame: 1
       lastFrame: 130
       wrapMode: 0
@@ -412,7 +636,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: knife_attack_1@handgun_01
-      takeName: Armature|knife_attack_1@handgun_01
+      takeName: Armature|knife_attack_1
       firstFrame: 1
       lastFrame: 74
       wrapMode: 0
@@ -440,7 +664,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: knife_attack_2@handgun_01
-      takeName: Armature|knife_attack_2@handgun_01
+      takeName: Armature|knife_attack_2
       firstFrame: 1
       lastFrame: 30
       wrapMode: 0
@@ -468,7 +692,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: out_of_ammo_slider@handgun_01
-      takeName: Armature|out_of_ammo_slider@handgun_01
+      takeName: Armature|out_of_ammo_slider
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -496,7 +720,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: reload_ammo_left@handgun_01
-      takeName: Armature|reload_ammo_left@handgun_01
+      takeName: Armature|reload_ammo_left
       firstFrame: 1
       lastFrame: 52
       wrapMode: 0
@@ -524,7 +748,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: reload_out_of_ammo@handgun_01
-      takeName: Armature|reload_out_of_ammo@handgun_01
+      takeName: Armature|reload_out_of_ammo
       firstFrame: 1
       lastFrame: 68
       wrapMode: 0
@@ -552,7 +776,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: run@handgun_01
-      takeName: Armature|run@handgun_01
+      takeName: Armature|run
       firstFrame: 1
       lastFrame: 24
       wrapMode: 0
@@ -580,7 +804,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: take_out_weapon@handgun_01
-      takeName: Armature|take_out_weapon@handgun_01
+      takeName: Armature|take_out_weapon
       firstFrame: 1
       lastFrame: 15
       wrapMode: 0
@@ -608,7 +832,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: walk@handgun_01
-      takeName: Armature|walk@handgun_01
+      takeName: Armature|walk
       firstFrame: 1
       lastFrame: 24
       wrapMode: 0

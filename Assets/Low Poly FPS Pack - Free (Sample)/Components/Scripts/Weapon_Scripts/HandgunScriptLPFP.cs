@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 
-// ----- Low Poly FPS Pack Free Version -----
 public class HandgunScriptLPFP : MonoBehaviour {
 
 	//Animator component attached to weapon
@@ -20,12 +19,62 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	[Tooltip("Default value for camera field of view (40 is recommended).")]
 	public float defaultFov = 40.0f;
 
-	public float aimFov = 15.0f;
-
 	[Header("UI Weapon Name")]
 	[Tooltip("Name of the current weapon, shown in the game UI.")]
 	public string weaponName;
 	private string storedWeaponName;
+
+	[Header("Weapon Attachments (Only use one scope attachment)")]
+	[Space(10)]
+	//Toggle weapon attachments (loads at start)
+	//Toggle scope 02
+	public bool scope2;
+	public Sprite scope2Texture;
+	public float scope2TextureSize = 0.01f;
+	//Scope 02 camera fov
+	[Range(5, 40)]
+	public float scope2AimFOV = 25;
+	[Space(10)]
+	//Toggle scope 03
+	public bool scope3;
+	public Sprite scope3Texture;
+	public float scope3TextureSize = 0.025f;
+	//Scope 03 camera fov
+	[Range(5, 40)]
+	public float scope3AimFOV = 20;
+	[Space(10)]
+	//Toggle iron sights
+	public bool ironSights;
+	public bool alwaysShowIronSights;
+	//Iron sights camera fov
+	[Range(5, 40)]
+	public float ironSightsAimFOV = 16;
+	[Space(10)]
+	//Toggle silencer
+	public bool silencer;
+	//Weapon attachments components
+	[System.Serializable]
+	public class weaponAttachmentRenderers 
+	{
+		[Header("Scope Model Renderers")]
+		[Space(10)]
+		//All attachment renderer components
+		public SkinnedMeshRenderer scope2Renderer;
+		public SkinnedMeshRenderer scope3Renderer;
+		public SkinnedMeshRenderer ironSightsRenderer;
+		public SkinnedMeshRenderer silencerRenderer;
+		[Header("Scope Sight Mesh Renderers")]
+		[Space(10)]
+		//Scope render meshes
+		public GameObject scope2RenderMesh;
+		public GameObject scope3RenderMesh;
+		[Header("Scope Sight Sprite Renderers")]
+		[Space(10)]
+		//Scope sight textures
+		public SpriteRenderer scope2SpriteRenderer;
+		public SpriteRenderer scope3SpriteRenderer;
+	}
+	public weaponAttachmentRenderers WeaponAttachmentRenderers;
 
 	[Header("Weapon Sway")]
 	//Enables weapon sway
@@ -146,6 +195,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 	public class soundClips
 	{
 		public AudioClip shootSound;
+		public AudioClip silencerShootSound;
 		public AudioClip takeOutSound;
 		public AudioClip holsterSound;
 		public AudioClip reloadSoundOutOfAmmo;
@@ -164,6 +214,86 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		currentAmmo = ammo;
 
 		muzzleflashLight.enabled = false;
+
+		//Weapon attachments
+		//If scope 2 is true
+		if (scope2 == true) 
+		{
+			//If scope2 is true, enable scope renderer
+			WeaponAttachmentRenderers.scope2Renderer.GetComponent
+			<SkinnedMeshRenderer> ().enabled = true;
+			//Also enable the scope sight render mesh
+			WeaponAttachmentRenderers.scope2RenderMesh.SetActive(true);
+			//Set the scope sight texture
+			WeaponAttachmentRenderers.scope2SpriteRenderer.GetComponent
+			<SpriteRenderer>().sprite = scope2Texture;
+			//Set the scope texture size
+			WeaponAttachmentRenderers.scope2SpriteRenderer.transform.localScale = new Vector3 
+				(scope2TextureSize, scope2TextureSize, scope2TextureSize);
+		} 
+		else 
+		{
+			//If scope2 is false, disable scope renderer
+			WeaponAttachmentRenderers.scope2Renderer.GetComponent
+			<SkinnedMeshRenderer> ().enabled = false;
+			//Also disable the scope sight render mesh
+			WeaponAttachmentRenderers.scope2RenderMesh.SetActive(false);
+		}
+		//If scope 3 is true
+		if (scope3 == true) 
+		{
+			//If scope3 is true, enable scope renderer
+			WeaponAttachmentRenderers.scope3Renderer.GetComponent
+			<SkinnedMeshRenderer> ().enabled = true;
+			//Also enable the scope sight render mesh
+			WeaponAttachmentRenderers.scope3RenderMesh.SetActive(true);
+			//Set the scope sight texture
+			WeaponAttachmentRenderers.scope3SpriteRenderer.GetComponent
+			<SpriteRenderer>().sprite = scope3Texture;
+			//Set the scope texture size
+			WeaponAttachmentRenderers.scope3SpriteRenderer.transform.localScale = new Vector3 
+				(scope3TextureSize, scope3TextureSize, scope3TextureSize);
+		} 
+		else 
+		{
+			//If scope3 is false, disable scope renderer
+			WeaponAttachmentRenderers.scope3Renderer.GetComponent
+			<SkinnedMeshRenderer> ().enabled = false;
+			//Also disable the scope sight render mesh
+			WeaponAttachmentRenderers.scope3RenderMesh.SetActive(false);
+		}
+
+		//If alwaysShowIronSights is true
+		if (alwaysShowIronSights == true) {
+			WeaponAttachmentRenderers.ironSightsRenderer.GetComponent
+			<SkinnedMeshRenderer> ().enabled = true;
+		}
+
+		//If ironSights is true
+		if (ironSights == true) 
+		{
+			//If scope1 is true, enable scope renderer
+			WeaponAttachmentRenderers.ironSightsRenderer.GetComponent
+			<SkinnedMeshRenderer> ().enabled = true;
+		//If always show iron sights is enabled, don't disable 
+		//Do not use if iron sight renderer is not assigned in inspector
+		} else {
+			//If scope1 is false, disable scope renderer
+			WeaponAttachmentRenderers.ironSightsRenderer.GetComponent
+			<SkinnedMeshRenderer> ().enabled = false;
+		}
+		//If silencer is true and assigned in the inspector
+		if (silencer == true && 
+			WeaponAttachmentRenderers.silencerRenderer) 
+		{
+			//If scope1 is true, enable scope renderer
+			WeaponAttachmentRenderers.silencerRenderer.GetComponent
+			<SkinnedMeshRenderer> ().enabled = true;
+		} else {
+			//If scope1 is false, disable scope renderer
+			WeaponAttachmentRenderers.silencerRenderer.GetComponent
+			<SkinnedMeshRenderer> ().enabled = false;
+		}
 	}
 
 	private void Start () {
@@ -206,13 +336,40 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		//Toggle camera FOV when right click is held down
 		if(Input.GetButton("Fire2") && !isReloading && !isRunning && !isInspecting) 
 		{
-			
-			gunCamera.fieldOfView = Mathf.Lerp (gunCamera.fieldOfView,
-				aimFov, fovSpeed * Time.deltaTime);
-			
+			if (ironSights == true) 
+			{
+				gunCamera.fieldOfView = Mathf.Lerp (gunCamera.fieldOfView,
+					ironSightsAimFOV, fovSpeed * Time.deltaTime);
+			}
+
+			if (scope2 == true) 
+			{
+				gunCamera.fieldOfView = Mathf.Lerp (gunCamera.fieldOfView,
+					scope2AimFOV, fovSpeed * Time.deltaTime);
+			}
+			if (scope3 == true) 
+			{
+				gunCamera.fieldOfView = Mathf.Lerp (gunCamera.fieldOfView,
+					scope3AimFOV, fovSpeed * Time.deltaTime);
+			}
+
 			isAiming = true;
 
-			anim.SetBool ("Aim", true);
+			//If iron sights are enabled, use normal aim
+			if (ironSights == true) 
+			{
+				anim.SetBool ("Aim", true);
+			}
+			//If scope 2 is enabled, use scope 2 aim in animation
+			if (scope2 == true) 
+			{
+				anim.SetBool ("Aim Scope 2", true);
+			}
+			//If scope 3 is enabled, use scope 3 aim in animation
+			if (scope3 == true) 
+			{
+				anim.SetBool ("Aim Scope 3", true);
+			}
 
 			if (!soundHasPlayed) 
 			{
@@ -220,6 +377,19 @@ public class HandgunScriptLPFP : MonoBehaviour {
 				mainAudioSource.Play ();
 	
 				soundHasPlayed = true;
+			}
+				
+			//If scope 2 is true, show scope sight texture when aiming
+			if (scope2 == true) 
+			{
+				WeaponAttachmentRenderers.scope2SpriteRenderer.GetComponent
+				<SpriteRenderer> ().enabled = true;
+			}
+			//If scope 3 is true, show scope sight texture when aiming
+			if (scope3 == true) 
+			{
+				WeaponAttachmentRenderers.scope3SpriteRenderer.GetComponent
+				<SpriteRenderer> ().enabled = true;
 			}
 		} 
 		else 
@@ -229,8 +399,37 @@ public class HandgunScriptLPFP : MonoBehaviour {
 				defaultFov,fovSpeed * Time.deltaTime);
 
 			isAiming = false;
-	
-			anim.SetBool ("Aim", false);
+
+			//If iron sights are enabled, use normal aim out
+			if (ironSights == true) 
+			{
+				anim.SetBool ("Aim", false);
+			}
+			//If scope 2 is enabled, use scope 2 aim out animation
+			if (scope2 == true) 
+			{
+				anim.SetBool ("Aim Scope 2", false);
+			}
+			//If scope 3 is enabled, use scope 3 aim out animation
+			if (scope3 == true) 
+			{
+				anim.SetBool ("Aim Scope 3", false) ;
+			}
+
+			soundHasPlayed = false;
+
+			//If scope 2 is true, disable scope sight texture when not aiming
+			if (scope2 == true) 
+			{
+				WeaponAttachmentRenderers.scope2SpriteRenderer.GetComponent
+				<SpriteRenderer> ().enabled = false;
+			}
+			//If scope 3 is true, disable scope sight texture when not aiming
+			if (scope3 == true) 
+			{
+				WeaponAttachmentRenderers.scope3SpriteRenderer.GetComponent
+				<SpriteRenderer> ().enabled = false;
+			}
 		}
 		//Aiming end
 
@@ -329,14 +528,26 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0) && !outOfAmmo && !isReloading && !isInspecting && !isRunning) 
 		{
 			anim.Play ("Fire", 0, 0f);
-	
-			muzzleParticles.Emit (1);
+			if (!silencer) 
+			{
+				muzzleParticles.Emit (1);
+			}
 				
 			//Remove 1 bullet from ammo
 			currentAmmo -= 1;
 
-			shootAudioSource.clip = SoundClips.shootSound;
-			shootAudioSource.Play ();
+			//If silencer is enabled, play silencer shoot sound
+			if (silencer == true) 
+			{
+				shootAudioSource.clip = SoundClips.silencerShootSound;
+				shootAudioSource.Play ();
+			} 
+			//If silencer is not enabled, play default shoot sound
+			else 
+			{
+				shootAudioSource.clip = SoundClips.shootSound;
+				shootAudioSource.Play ();
+			}
 
 			//Light flash start
 			StartCoroutine(MuzzleFlashLight());
@@ -344,8 +555,10 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			if (!isAiming) //if not aiming
 			{
 				anim.Play ("Fire", 0, 0f);
-		
-				muzzleParticles.Emit (1);
+				if (!silencer) 
+				{
+					muzzleParticles.Emit (1);
+				}
 
 				if (enableSparks == true) 
 				{
@@ -355,10 +568,21 @@ public class HandgunScriptLPFP : MonoBehaviour {
 			} 
 			else //if aiming
 			{
-				anim.Play ("Aim Fire", 0, 0f);
+				if (ironSights == true) 
+				{
+					anim.Play ("Aim Fire", 0, 0f);
+				}
+				if (scope2 == true) 
+				{
+					anim.Play ("Aim Fire Scope 2", 0, 0f);
+				}
+				if (scope3 == true) 
+				{
+					anim.Play ("Aim Fire Scope 3", 0, 0f);
+				}
 					
 				//If random muzzle is false
-				if (!randomMuzzleflash) {
+				if (!randomMuzzleflash && !silencer) {
 					muzzleParticles.Emit (1);
 					//If random muzzle is true
 				} 
@@ -372,7 +596,7 @@ public class HandgunScriptLPFP : MonoBehaviour {
 							//Emit random amount of spark particles
 							sparkParticles.Emit (Random.Range (1, 6));
 						}
-						if (enableMuzzleflash == true) 
+						if (enableMuzzleflash == true && !silencer) 
 						{
 							muzzleParticles.Emit (1);
 							//Light flash start
@@ -610,4 +834,3 @@ public class HandgunScriptLPFP : MonoBehaviour {
 		}
 	}
 }
-// ----- Low Poly FPS Pack Free Version -----

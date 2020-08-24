@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// ----- Low Poly FPS Pack Free Version -----
 public class CasingScript : MonoBehaviour {
 
 	[Header("Force X")]
@@ -90,4 +89,3 @@ public class CasingScript : MonoBehaviour {
 		Destroy (gameObject);
 	}
 }
-// ----- Low Poly FPS Pack Free Version -----

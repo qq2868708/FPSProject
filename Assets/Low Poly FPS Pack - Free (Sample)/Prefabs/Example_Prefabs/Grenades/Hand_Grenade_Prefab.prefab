@@ -335,9 +335,9 @@ MonoBehaviour:
   explosionPrefab: {fileID: 4811645123968692, guid: 301583a5af63a494298d60cd9f296909,
     type: 2}
   radius: 5
-  power: 3500
-  minimumForce: 1500
-  maximumForce: 2500
+  power: 850
+  minimumForce: 750
+  maximumForce: 1000
   impactSound: {fileID: 82305533685823640}
 --- !u!114 &114854480301580436
 MonoBehaviour:

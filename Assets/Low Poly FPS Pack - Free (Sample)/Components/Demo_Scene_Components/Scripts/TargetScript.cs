@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// ----- Low Poly FPS Pack Free Version -----
 public class TargetScript : MonoBehaviour {
 
 	float randomTime;
@@ -62,4 +61,3 @@ public class TargetScript : MonoBehaviour {
 		routineStarted = false;
 	}
 }
-// ----- Low Poly FPS Pack Free Version -----
