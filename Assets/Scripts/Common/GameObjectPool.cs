@@ -5,13 +5,13 @@ using System.Collections.Generic;
 /// <summary>
 /// 对象池，用于管理对象和复用
 /// </summary>
-public class GameObjectPool: MonoBehaviour
+public class GameObjectPool : MonoBehaviour
 {
     //单例模式
     public static GameObjectPool instance;
     private GameObject pool;
 
-    public Dictionary<string,List<GameObject>> dict =new Dictionary<string,List<GameObject>>();
+    public Dictionary<string, List<GameObject>> dict = new Dictionary<string, List<GameObject>>();
 
 
     private void Awake()
@@ -24,10 +24,10 @@ public class GameObjectPool: MonoBehaviour
         }
     }
 
-    public GameObject CreatObject(string objName,GameObject obj)
+    public GameObject CreatObject(string objName, GameObject obj)
     {
         //如果对象池已经管理了该对象
-        if(dict.ContainsKey(objName))
+        if (dict.ContainsKey(objName))
         {
             //查找有没有没有使用的空闲对象
             var tmp_list = dict[objName];
@@ -43,7 +43,7 @@ public class GameObjectPool: MonoBehaviour
                 //没有空闲对象，则新建一个对象并交给对象池统一管理
                 tmp_obj = Instantiate(obj);
                 tmp_list.Add(tmp_obj);
-                tmp_obj.transform.parent=this.transform;
+                tmp_obj.transform.parent = this.transform;
                 tmp_obj.SetActive(true);
                 return tmp_obj;
             }
@@ -63,9 +63,9 @@ public class GameObjectPool: MonoBehaviour
     //检测有无空闲对象
     public GameObject CheckUsage(List<GameObject> list)
     {
-        foreach(GameObject obj in list)
+        foreach (GameObject obj in list)
         {
-            if(!obj.activeInHierarchy)
+            if (!obj.activeInHierarchy)
             {
                 return obj;
             }
@@ -77,5 +77,18 @@ public class GameObjectPool: MonoBehaviour
     public void CollectGameObject(GameObject obj)
     {
         obj.SetActive(false);
+    }
+
+    //延时回收对象
+    public void CollectGameObject(GameObject obj,float time)
+    {
+        StartCoroutine(CollectDelay(obj, time));
+    }
+
+    //无法在其他对象中启用协程，做成私有并公开方法
+    private IEnumerator CollectDelay(GameObject obj, float time)
+    {
+        yield return new WaitForSeconds(time);
+        CollectGameObject(obj);
     }
 }

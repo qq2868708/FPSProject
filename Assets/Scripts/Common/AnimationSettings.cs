@@ -11,15 +11,19 @@ public static class AnimationSettings
     public static string walk = "Walk";
     public static string reloadOutof = "ReloadOutof";
     public static string reloadLeft = "ReloadLeft";
+    public static string aim = "Aim";
+    public static string fire = "Fire";
 
     //动画片段的名称
     public static string takeOutClip = "take_out_weapon@assault_rifle_01";
     public static string idleClip = "idle@assault_rifle_01";
     public static string walkClip = "walk@assault_rifle_01";
     public static string runClip = "run@assault_rifle_01";
-    public static string shootClip = "fire@assault_rifle_01 0";
+    //public static string shootClip = "fire@assault_rifle_01 0";
+    public static string shootClip="Fire";
+    public static string aimClip = "Aim";
 
-    
+
 
     public static Dictionary<string ,string> Dic = new Dictionary<string, string>();
 

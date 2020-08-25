@@ -83,7 +83,6 @@ public class FPSAnimatorController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(controller.state);
         this.PlayAnimation(controller.state);
     }
 }

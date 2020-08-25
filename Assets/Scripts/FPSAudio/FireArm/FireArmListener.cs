@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// 控制脚步声音
+/// 控制射击声音
 /// </summary>
 public class FireArmListener : MonoBehaviour
 {

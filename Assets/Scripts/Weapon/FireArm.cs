@@ -22,16 +22,24 @@ public abstract class FireArm : MonoBehaviour,IWeapon
 
     public float FireRate;
     public float time;
+
     //使用统一的动画机接口
     public FPSAnimatorController controller;
 
-    //是否在换弹
-    public bool isReloading=false;
+    //是否可以射击
+    public bool isReady=false;
     //子弹的预制件
     public GameObject bullet;
 
     //声音组件
     public FireArmListener listener;
+    public ImpactListener impact_Listener;
+
+    //相机缩放
+    public float originalFOV;
+    public Camera eyeCamera;
+
+    public bool isAiming;
 
     protected virtual void Start()
     {
@@ -40,6 +48,8 @@ public abstract class FireArm : MonoBehaviour,IWeapon
         controller = GetComponent<FPSAnimatorController>();
         controller.Weapon = this;
         listener = GetComponent<FireArmListener>();
+        originalFOV = eyeCamera.fieldOfView;
+        impact_Listener = GetComponent<ImpactListener>();
     }
 
     public virtual void DoAttack()
@@ -77,4 +87,10 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     {
 
     }
+
+    public virtual void Aim()
+    {
+        
+    }
+
 }

@@ -13,7 +13,7 @@ public class AssaultRifle : FireArm
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0)&&isReloading!=true)
+        if(Input.GetMouseButton(0)&& isReady != true)
         {
             DoAttack();
         }
@@ -24,13 +24,22 @@ public class AssaultRifle : FireArm
             {
                 if(currentAmmoCarried!=0)
                 {
-                    if(!isReloading)
+                    if(!isReady)
                     {
                         Reload();
-                        isReloading = true;
+                        isReady = true;
                     }
                 }
             }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Aim();
+        }
+        else if(Input.GetMouseButtonUp(1))
+        {
+            Aim();
         }
     }
 
@@ -70,7 +79,7 @@ public class AssaultRifle : FireArm
             currentAmmoInMag = currentAmmoCarried;
             currentAmmoCarried = 0;
         }
-        isReloading = false;
+        isReady = false;
         controller.playerAnimator.SetLayerWeight(1, 0);
     }
 
@@ -85,7 +94,8 @@ public class AssaultRifle : FireArm
             muzzleParticle.Play();
             casingParticle.Play();
             currentAmmoInMag -= 1;
-            controller.playerAnimator.Play(AnimationSettings.shootClip, 0, 0);
+            controller.playerAnimator.Play(AnimationSettings.shootClip, isAiming?2:0, 0);
+            //controller.SetTrigger(AnimationSettings.fire,false);
             CreatBullet();
             listener.PlayAudio("shoot");
         }
@@ -101,10 +111,66 @@ public class AssaultRifle : FireArm
     public override void CancelCurrent()
     {
         base.CancelCurrent();
-        if(isReloading)
+        if(isReady)
         {
             controller.playerAnimator.SetLayerWeight(1, 0);
-            isReloading = false;
+            isReady = false;
         }
     }
+
+    //瞄准
+    public override void Aim()
+    {
+        base.Aim();
+        isAiming = !isAiming;
+        if (isAiming)
+        {
+            controller.playerAnimator.SetLayerWeight(2, 1);
+            controller.playerAnimator.SetBool(AnimationSettings.aim, isAiming);
+        }
+        else
+        {
+            controller.playerAnimator.SetBool(AnimationSettings.aim, isAiming);
+            
+        }
+        StartCoroutine(Scale());
+    }
+
+    //相机缩放
+    public IEnumerator Scale()
+    {
+        float tmp_vel = 0.1f;
+        while(true)
+        {
+            yield return null;
+            if (isAiming)
+            {
+                eyeCamera.fieldOfView = Mathf.SmoothDamp(eyeCamera.fieldOfView, originalFOV - 26, ref tmp_vel, Time.deltaTime);
+            }
+            else
+            {
+                eyeCamera.fieldOfView = Mathf.SmoothDamp(originalFOV, eyeCamera.fieldOfView,  ref tmp_vel, Time.deltaTime);
+            }
+        }
+        
+    }
+
+    //动画事件，设置层的权重
+    public void SetLayer(int weight)
+    {
+        controller.playerAnimator.SetLayerWeight(2, weight);
+    }
+    //动画事件，设置是否可以射击
+    public void SetState(int state)
+    {
+        if(state==1)
+        {
+            isReady = true;
+        }
+        else
+        {
+            isReady = false;
+        }
+    }
+    
 }

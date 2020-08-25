@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -2333880744827825906}
   - component: {fileID: -8069250421875167885}
   - component: {fileID: 5069137660892870830}
+  - component: {fileID: -174075958600170923}
   m_Layer: 0
   m_Name: BulletPrefab
   m_TagString: Untagged
@@ -168,6 +169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
+  audioClips: {fileID: 11400000, guid: e7dc6da3d1f9c40b1b49794f3b65b2f7, type: 2}
+  bulletEffect: {fileID: 1879272669879180, guid: 75b24d93631c6b949bca94153bdb3f89,
+    type: 3}
 --- !u!135 &5069137660892870830
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -181,3 +185,17 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-174075958600170923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4792577774353629631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609d628881fb94cbdbe2df0ca3de094e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  audioClips: {fileID: 11400000, guid: e7dc6da3d1f9c40b1b49794f3b65b2f7, type: 2}
