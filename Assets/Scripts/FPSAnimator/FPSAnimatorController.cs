@@ -7,9 +7,22 @@ using UnityEngine;
 /// </summary>
 public class FPSAnimatorController : MonoBehaviour
 {
-    private Animator playerAnimator;
+    public Animator playerAnimator;
     private string CurrentAnimation;
     private FPSController_CharacterController controller;
+    private IWeapon weapon;
+
+    public IWeapon Weapon
+    {
+        get
+        {
+            return weapon;
+        }
+        set
+        {
+            weapon = value;
+        }
+    }
 
     private void Start()
     {
@@ -41,7 +54,9 @@ public class FPSAnimatorController : MonoBehaviour
                 }
             case CharacterState.run:
                 {
+                    //奔跑时可以打断当前正在进行的动画
                     this.PlayAnimation(AnimationSettings.run);
+                    weapon.CancelCurrent();
                     break;
                 }
             case CharacterState.crouched_Idle:
@@ -54,6 +69,15 @@ public class FPSAnimatorController : MonoBehaviour
                     this.PlayAnimation(AnimationSettings.walk);
                     break;
                 }
+        }
+    }
+
+    public void SetTrigger(string animName,bool cancel)
+    {
+        playerAnimator.SetTrigger(animName);
+        if(cancel)
+        {
+
         }
     }
 

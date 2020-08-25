@@ -3,6 +3,8 @@ using System.Collections;
 
 public abstract class FireArm : MonoBehaviour,IWeapon
 {
+    public string weapn_Name;
+
     //枪口特效
     public Transform muzzlePoint;
     public ParticleSystem muzzleParticle;
@@ -20,21 +22,24 @@ public abstract class FireArm : MonoBehaviour,IWeapon
 
     public float FireRate;
     public float time;
-
-    public Animator gunAnimator;
+    //使用统一的动画机接口
+    public FPSAnimatorController controller;
 
     //是否在换弹
     public bool isReloading=false;
-
+    //子弹的预制件
     public GameObject bullet;
 
-    protected Animator GunAnimator;
+    //声音组件
+    public FireArmListener listener;
 
     protected virtual void Start()
     {
         currentAmmoInMag = ammoInMag;
         currentAmmoCarried = MaxAmmorCarried;
-        gunAnimator = GetComponent<Animator>();
+        controller = GetComponent<FPSAnimatorController>();
+        controller.Weapon = this;
+        listener = GetComponent<FireArmListener>();
     }
 
     public virtual void DoAttack()
@@ -66,5 +71,10 @@ public abstract class FireArm : MonoBehaviour,IWeapon
         tmp_obj.transform.position = muzzlePoint.position;
         tmp_obj.transform.rotation = muzzlePoint.rotation;
         tmp_obj.GetComponent<Rigidbody>().velocity = tmp_obj.transform.forward * 100;
+    }
+
+    public virtual void CancelCurrent()
+    {
+
     }
 }

@@ -10,4 +10,5 @@ public enum CharacterState
     crouched_Walk,
     crouched_Run,
     crouched_Idle,
+    reloading,
 }

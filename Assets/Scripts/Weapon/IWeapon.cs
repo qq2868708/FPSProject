@@ -8,4 +8,7 @@ using UnityEngine;
 public interface IWeapon
 {
     void DoAttack();
+
+    //取消当前动作
+    void CancelCurrent();
 }
