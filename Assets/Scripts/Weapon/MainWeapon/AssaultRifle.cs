@@ -3,11 +3,14 @@ using System.Collections;
 
 public class AssaultRifle : FireArm
 {
+    private FPSMouseLook mouseLook;
+
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
         listener.SetAudio(weapn_Name);
+        mouseLook = FindObjectOfType<FPSMouseLook>();
     }
 
     // Update is called once per frame
@@ -98,6 +101,7 @@ public class AssaultRifle : FireArm
             //controller.SetTrigger(AnimationSettings.fire,false);
             CreatBullet();
             listener.PlayAudio("shoot");
+            mouseLook.FiringForTest();
         }
     }
 
@@ -145,11 +149,11 @@ public class AssaultRifle : FireArm
             yield return null;
             if (isAiming)
             {
-                eyeCamera.fieldOfView = Mathf.SmoothDamp(eyeCamera.fieldOfView, originalFOV - 26, ref tmp_vel, Time.deltaTime);
+                eyeCamera.fieldOfView = Mathf.SmoothDamp(eyeCamera.fieldOfView, originalFOV - 26, ref tmp_vel, 0.8f);
             }
             else
             {
-                eyeCamera.fieldOfView = Mathf.SmoothDamp(originalFOV, eyeCamera.fieldOfView,  ref tmp_vel, Time.deltaTime);
+                eyeCamera.fieldOfView = Mathf.SmoothDamp(eyeCamera.fieldOfView, originalFOV,  ref tmp_vel, 0.8f);
             }
         }
         

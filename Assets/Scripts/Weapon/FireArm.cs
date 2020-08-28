@@ -41,6 +41,9 @@ public abstract class FireArm : MonoBehaviour,IWeapon
 
     public bool isAiming;
 
+    //弹道散射角度
+    public float SpreadAngle;
+
     protected virtual void Start()
     {
         currentAmmoInMag = ammoInMag;
@@ -77,9 +80,9 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     public void CreatBullet()
     {
         var tmp_obj = GameObjectPool.instance.CreatObject("Bullet",bullet);
-
         tmp_obj.transform.position = muzzlePoint.position;
         tmp_obj.transform.rotation = muzzlePoint.rotation;
+        tmp_obj.transform.eulerAngles += CaculateSpreadBullet();
         tmp_obj.GetComponent<Rigidbody>().velocity = tmp_obj.transform.forward * 100;
     }
 
@@ -91,6 +94,13 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     public virtual void Aim()
     {
         
+    }
+
+    //根据相机的缩放产生一个散布，相机fov越大，散布越小
+    protected Vector3 CaculateSpreadBullet()
+    {
+        float tmp_SpreadPercent = eyeCamera.fieldOfView/SpreadAngle;
+        return tmp_SpreadPercent * Random.insideUnitCircle;
     }
 
 }
