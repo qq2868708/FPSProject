@@ -137,8 +137,6 @@ public class FPSController_CharacterController : MonoBehaviour
                 }
             }
 
-            //animatorController.PlayAnimation(state);
-
         }
 
         //计算运动速度

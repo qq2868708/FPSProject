@@ -14,12 +14,14 @@ public static class AnimationSettings
     public static string aim = "Aim";
     public static string fire = "Fire";
 
+    //适用于大狙
+    public static string reloadOnce = "ReloadOnce";
+
     //动画片段的名称
-    public static string takeOutClip = "take_out_weapon@assault_rifle_01";
-    public static string idleClip = "idle@assault_rifle_01";
-    public static string walkClip = "walk@assault_rifle_01";
-    public static string runClip = "run@assault_rifle_01";
-    //public static string shootClip = "fire@assault_rifle_01 0";
+    public static string takeOutClip = "take_out_weapon";
+    public static string idleClip = "idle";
+    public static string walkClip = "walk";
+    public static string runClip = "run";
     public static string shootClip="Fire";
     public static string aimClip = "Aim";
 

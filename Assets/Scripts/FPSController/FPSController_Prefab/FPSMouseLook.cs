@@ -26,9 +26,12 @@ public class FPSMouseLook : MonoBehaviour
     private Vector2 currentRecoil;
     public float recoilFadeOutTime=0.3f;
 
+    public CameraShakeController cameraShakeController;
+
     private void Start()
     {
         camera = this.gameObject.transform;
+        cameraShakeController = GetComponentInChildren<CameraShakeController>();
     }
 
     private void Update()
@@ -70,6 +73,8 @@ public class FPSMouseLook : MonoBehaviour
         currentRecoil += recoilRange;
         //每次射击时清0，不然曲线超过范围将不会发挥作用
         currentRecoilTime = 0;
+
+        cameraShakeController.StartSpring();
     }
         
 }

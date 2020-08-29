@@ -9,6 +9,7 @@ public class FPSAnimatorController : MonoBehaviour
 {
     public Animator playerAnimator;
     private string CurrentAnimation;
+    [SerializeField]
     private FPSController_CharacterController controller;
     private IWeapon weapon;
 

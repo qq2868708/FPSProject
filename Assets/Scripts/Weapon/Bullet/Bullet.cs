@@ -48,7 +48,6 @@ public class Bullet : MonoBehaviour
                 //产生声音
                 if (listener != null)
                 {
-                    Debug.Log(1);
                     listener.Play(hit.transform.position);
                 }
 

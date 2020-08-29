@@ -9,84 +9,13 @@ public class AssaultRifle : FireArm
     protected override void Start()
     {
         base.Start();
+        Debug.Log(weapn_Name);
         listener.SetAudio(weapn_Name);
         mouseLook = FindObjectOfType<FPSMouseLook>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetMouseButton(0)&& isReady != true)
-        {
-            DoAttack();
-        }
 
-        if(Input.GetKeyDown(InputSettings.Reload))
-        {
-            if(currentAmmoInMag<ammoInMag)
-            {
-                if(currentAmmoCarried!=0)
-                {
-                    if(!isReady)
-                    {
-                        Reload();
-                        isReady = true;
-                    }
-                }
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            Aim();
-        }
-        else if(Input.GetMouseButtonUp(1))
-        {
-            Aim();
-        }
-    }
-
-    protected override void Reload()
-    {
-        if(currentAmmoCarried<=0)
-        {
-            return;
-        }
-        
-        else
-        {
-            controller.playerAnimator.SetLayerWeight(1,1);
-            if (currentAmmoInMag<=0)
-            {
-                controller.playerAnimator.SetTrigger(AnimationSettings.reloadOutof);
-                listener.PlayAudio("reloadOutof");
-            }
-            else
-            {
-                listener.PlayAudio("reloadLeft");
-                controller.playerAnimator.SetTrigger(AnimationSettings.reloadLeft);
-            }
-        }
-    }
-
-    public void ReloadAmmo()
-    {
-        Debug.Log("reloading");
-        if (currentAmmoCarried >= ammoInMag)
-        {
-            currentAmmoInMag = ammoInMag;
-            currentAmmoCarried -= ammoInMag;
-        }
-        else if (currentAmmoCarried != 0)
-        {
-            currentAmmoInMag = currentAmmoCarried;
-            currentAmmoCarried = 0;
-        }
-        isReady = false;
-        controller.playerAnimator.SetLayerWeight(1, 0);
-    }
-
-    protected override void Shooting()
+    public override void Shooting()
     {
         if (currentAmmoInMag <= 0)
         {
@@ -97,8 +26,8 @@ public class AssaultRifle : FireArm
             muzzleParticle.Play();
             casingParticle.Play();
             currentAmmoInMag -= 1;
+            //根据是否瞄准选择激活哪一个动画层
             controller.playerAnimator.Play(AnimationSettings.shootClip, isAiming?2:0, 0);
-            //controller.SetTrigger(AnimationSettings.fire,false);
             CreatBullet();
             listener.PlayAudio("shoot");
             mouseLook.FiringForTest();
@@ -107,8 +36,10 @@ public class AssaultRifle : FireArm
 
     public override void DoAttack()
     {
-        base.DoAttack();
-        Shooting();
+        if(isReady==true)
+        {
+            Shooting();
+        }
     }
 
     //用于打断某些动画
@@ -118,14 +49,12 @@ public class AssaultRifle : FireArm
         if(isReady)
         {
             controller.playerAnimator.SetLayerWeight(1, 0);
-            isReady = false;
         }
     }
 
     //瞄准
     public override void Aim()
     {
-        base.Aim();
         isAiming = !isAiming;
         if (isAiming)
         {
@@ -164,17 +93,6 @@ public class AssaultRifle : FireArm
     {
         controller.playerAnimator.SetLayerWeight(2, weight);
     }
-    //动画事件，设置是否可以射击
-    public void SetState(int state)
-    {
-        if(state==1)
-        {
-            isReady = true;
-        }
-        else
-        {
-            isReady = false;
-        }
-    }
+    
     
 }

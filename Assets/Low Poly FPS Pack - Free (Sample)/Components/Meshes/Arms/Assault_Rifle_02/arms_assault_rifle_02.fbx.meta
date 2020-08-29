@@ -1,160 +1,462 @@
 fileFormatVersion: 2
 guid: a95d583089688544a862556eafd1ba53
-timeCreated: 1553584933
-licenseType: Store
 ModelImporter:
-  serializedVersion: 21
-  fileIDToRecycleName:
-    100000: arm_L
-    100002: arm_R
-    100004: arm_target_L
-    100006: arm_target_R
-    100008: Armature
-    100010: arms
-    100012: //RootNode
-    100014: assault_rifle_02
-    100016: assault_rifle_02_iron_sights
-    100018: bullet
-    100020: camera
-    100022: finger_01_L
-    100024: finger_01_R
-    100026: finger_02_L
-    100028: finger_02_R
-    100030: finger_03_L
-    100032: finger_03_R
-    100034: flap
-    100036: hand_L
-    100038: hand_R
-    100040: IK_arm_L
-    100042: IK_arm_R
-    100044: knife
-    100046: knife 1
-    100048: lower_arm_L
-    100050: lower_arm_R
-    100052: mag
-    100054: middle_finger_01_L
-    100056: middle_finger_01_R
-    100058: middle_finger_02_L
-    100060: middle_finger_02_R
-    100062: middle_finger_03_L
-    100064: middle_finger_03_R
-    100066: scope_01
-    100068: scope_02
-    100070: scope_03
-    100072: scope_04
-    100074: silencer
-    100076: slider
-    100078: thumb_01_L
-    100080: thumb_01_R
-    100082: thumb_02_L
-    100084: thumb_02_R
-    100086: thumb_03_L
-    100088: thumb_03_R
-    100090: weapon
-    400000: arm_L
-    400002: arm_R
-    400004: arm_target_L
-    400006: arm_target_R
-    400008: Armature
-    400010: arms
-    400012: //RootNode
-    400014: assault_rifle_02
-    400016: assault_rifle_02_iron_sights
-    400018: bullet
-    400020: camera
-    400022: finger_01_L
-    400024: finger_01_R
-    400026: finger_02_L
-    400028: finger_02_R
-    400030: finger_03_L
-    400032: finger_03_R
-    400034: flap
-    400036: hand_L
-    400038: hand_R
-    400040: IK_arm_L
-    400042: IK_arm_R
-    400044: knife
-    400046: knife 1
-    400048: lower_arm_L
-    400050: lower_arm_R
-    400052: mag
-    400054: middle_finger_01_L
-    400056: middle_finger_01_R
-    400058: middle_finger_02_L
-    400060: middle_finger_02_R
-    400062: middle_finger_03_L
-    400064: middle_finger_03_R
-    400066: scope_01
-    400068: scope_02
-    400070: scope_03
-    400072: scope_04
-    400074: silencer
-    400076: slider
-    400078: thumb_01_L
-    400080: thumb_01_R
-    400082: thumb_02_L
-    400084: thumb_02_R
-    400086: thumb_03_L
-    400088: thumb_03_R
-    400090: weapon
-    4300000: arms
-    4300002: knife
-    4300004: assault_rifle_02
-    4300006: bullet
-    4300008: scope_04
-    4300010: scope_03
-    4300012: scope_02
-    4300014: scope_01
-    4300016: silencer
-    4300018: assault_rifle_02_iron_sights
-    7400000: aim_fire_pose@assault_rifle_02
-    7400002: aim_fire_pose_scope_01@assault_rifle_02
-    7400004: aim_fire_pose_scope_02@assault_rifle_02
-    7400006: aim_fire_pose_scope_03@assault_rifle_02
-    7400008: aim_fire_pose_scope_04@assault_rifle_02
-    7400010: aim_fire_scope_01@assault_rifle_02
-    7400012: aim_fire_scope_02@assault_rifle_02
-    7400014: aim_fire_scope_03@assault_rifle_02
-    7400016: aim_fire_scope_04@assault_rifle_02
-    7400018: aim_in@assault_rifle_02
-    7400020: aim_in_scope_01@assault_rifle_02
-    7400022: aim_in_scope_02@assault_rifle_02
-    7400024: aim_in_scope_03@assault_rifle_02
-    7400026: aim_in_scope_04@assault_rifle_02
-    7400028: aim_out@assault_rifle_02
-    7400030: aim_fire@assault_rifle_02
-    7400032: aim_out_scope_01@assault_rifle_02
-    7400034: aim_out_scope_02@assault_rifle_02
-    7400036: aim_out_scope_03@assault_rifle_02
-    7400038: aim_out_scope_04@assault_rifle_02
-    7400040: fire@assault_rifle_02
-    7400042: grenade_throw@assault_rifle_02
-    7400044: holster_weapon@assault_rifle_02
-    7400046: idle@assault_rifle_02
-    7400048: inspect_weapon@assault_rifle_02
-    7400050: knife_attack_1@assault_rifle_02
-    7400052: knife_attack_2@assault_rifle_02
-    7400054: Armature|pose_ref
-    7400056: reload_ammo_left@assault_rifle_02
-    7400058: reload_out_of_ammo@assault_rifle_02
-    7400060: run@assault_rifle_02
-    7400062: take_out_weapon@assault_rifle_02
-    7400064: walk@assault_rifle_02
-    9500000: //RootNode
-    13700000: arms
-    13700002: assault_rifle_02
-    13700004: assault_rifle_02_iron_sights
-    13700006: bullet
-    13700008: knife 1
-    13700010: scope_01
-    13700012: scope_02
-    13700014: scope_03
-    13700016: scope_04
-    13700018: silencer
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: arm_L
+  - first:
+      1: 100002
+    second: arm_R
+  - first:
+      1: 100004
+    second: arm_target_L
+  - first:
+      1: 100006
+    second: arm_target_R
+  - first:
+      1: 100008
+    second: Armature
+  - first:
+      1: 100010
+    second: arms
+  - first:
+      1: 100012
+    second: //RootNode
+  - first:
+      1: 100014
+    second: assault_rifle_02
+  - first:
+      1: 100016
+    second: assault_rifle_02_iron_sights
+  - first:
+      1: 100018
+    second: bullet
+  - first:
+      1: 100020
+    second: camera
+  - first:
+      1: 100022
+    second: finger_01_L
+  - first:
+      1: 100024
+    second: finger_01_R
+  - first:
+      1: 100026
+    second: finger_02_L
+  - first:
+      1: 100028
+    second: finger_02_R
+  - first:
+      1: 100030
+    second: finger_03_L
+  - first:
+      1: 100032
+    second: finger_03_R
+  - first:
+      1: 100034
+    second: flap
+  - first:
+      1: 100036
+    second: hand_L
+  - first:
+      1: 100038
+    second: hand_R
+  - first:
+      1: 100040
+    second: IK_arm_L
+  - first:
+      1: 100042
+    second: IK_arm_R
+  - first:
+      1: 100044
+    second: knife
+  - first:
+      1: 100046
+    second: knife 1
+  - first:
+      1: 100048
+    second: lower_arm_L
+  - first:
+      1: 100050
+    second: lower_arm_R
+  - first:
+      1: 100052
+    second: mag
+  - first:
+      1: 100054
+    second: middle_finger_01_L
+  - first:
+      1: 100056
+    second: middle_finger_01_R
+  - first:
+      1: 100058
+    second: middle_finger_02_L
+  - first:
+      1: 100060
+    second: middle_finger_02_R
+  - first:
+      1: 100062
+    second: middle_finger_03_L
+  - first:
+      1: 100064
+    second: middle_finger_03_R
+  - first:
+      1: 100066
+    second: scope_01
+  - first:
+      1: 100068
+    second: scope_02
+  - first:
+      1: 100070
+    second: scope_03
+  - first:
+      1: 100072
+    second: scope_04
+  - first:
+      1: 100074
+    second: silencer
+  - first:
+      1: 100076
+    second: slider
+  - first:
+      1: 100078
+    second: thumb_01_L
+  - first:
+      1: 100080
+    second: thumb_01_R
+  - first:
+      1: 100082
+    second: thumb_02_L
+  - first:
+      1: 100084
+    second: thumb_02_R
+  - first:
+      1: 100086
+    second: thumb_03_L
+  - first:
+      1: 100088
+    second: thumb_03_R
+  - first:
+      1: 100090
+    second: weapon
+  - first:
+      4: 400000
+    second: arm_L
+  - first:
+      4: 400002
+    second: arm_R
+  - first:
+      4: 400004
+    second: arm_target_L
+  - first:
+      4: 400006
+    second: arm_target_R
+  - first:
+      4: 400008
+    second: Armature
+  - first:
+      4: 400010
+    second: arms
+  - first:
+      4: 400012
+    second: //RootNode
+  - first:
+      4: 400014
+    second: assault_rifle_02
+  - first:
+      4: 400016
+    second: assault_rifle_02_iron_sights
+  - first:
+      4: 400018
+    second: bullet
+  - first:
+      4: 400020
+    second: camera
+  - first:
+      4: 400022
+    second: finger_01_L
+  - first:
+      4: 400024
+    second: finger_01_R
+  - first:
+      4: 400026
+    second: finger_02_L
+  - first:
+      4: 400028
+    second: finger_02_R
+  - first:
+      4: 400030
+    second: finger_03_L
+  - first:
+      4: 400032
+    second: finger_03_R
+  - first:
+      4: 400034
+    second: flap
+  - first:
+      4: 400036
+    second: hand_L
+  - first:
+      4: 400038
+    second: hand_R
+  - first:
+      4: 400040
+    second: IK_arm_L
+  - first:
+      4: 400042
+    second: IK_arm_R
+  - first:
+      4: 400044
+    second: knife
+  - first:
+      4: 400046
+    second: knife 1
+  - first:
+      4: 400048
+    second: lower_arm_L
+  - first:
+      4: 400050
+    second: lower_arm_R
+  - first:
+      4: 400052
+    second: mag
+  - first:
+      4: 400054
+    second: middle_finger_01_L
+  - first:
+      4: 400056
+    second: middle_finger_01_R
+  - first:
+      4: 400058
+    second: middle_finger_02_L
+  - first:
+      4: 400060
+    second: middle_finger_02_R
+  - first:
+      4: 400062
+    second: middle_finger_03_L
+  - first:
+      4: 400064
+    second: middle_finger_03_R
+  - first:
+      4: 400066
+    second: scope_01
+  - first:
+      4: 400068
+    second: scope_02
+  - first:
+      4: 400070
+    second: scope_03
+  - first:
+      4: 400072
+    second: scope_04
+  - first:
+      4: 400074
+    second: silencer
+  - first:
+      4: 400076
+    second: slider
+  - first:
+      4: 400078
+    second: thumb_01_L
+  - first:
+      4: 400080
+    second: thumb_01_R
+  - first:
+      4: 400082
+    second: thumb_02_L
+  - first:
+      4: 400084
+    second: thumb_02_R
+  - first:
+      4: 400086
+    second: thumb_03_L
+  - first:
+      4: 400088
+    second: thumb_03_R
+  - first:
+      4: 400090
+    second: weapon
+  - first:
+      43: 4300000
+    second: arms
+  - first:
+      43: 4300002
+    second: knife
+  - first:
+      43: 4300004
+    second: assault_rifle_02
+  - first:
+      43: 4300006
+    second: bullet
+  - first:
+      43: 4300008
+    second: scope_04
+  - first:
+      43: 4300010
+    second: scope_03
+  - first:
+      43: 4300012
+    second: scope_02
+  - first:
+      43: 4300014
+    second: scope_01
+  - first:
+      43: 4300016
+    second: silencer
+  - first:
+      43: 4300018
+    second: assault_rifle_02_iron_sights
+  - first:
+      74: 7400000
+    second: aim_fire_pose@assault_rifle_02
+  - first:
+      74: 7400002
+    second: aim_fire_pose_scope_01@assault_rifle_02
+  - first:
+      74: 7400004
+    second: aim_fire_pose_scope_02@assault_rifle_02
+  - first:
+      74: 7400006
+    second: aim_fire_pose_scope_03@assault_rifle_02
+  - first:
+      74: 7400008
+    second: aim_fire_pose_scope_04@assault_rifle_02
+  - first:
+      74: 7400010
+    second: aim_fire_scope_01@assault_rifle_02
+  - first:
+      74: 7400012
+    second: aim_fire_scope_02@assault_rifle_02
+  - first:
+      74: 7400014
+    second: aim_fire_scope_03@assault_rifle_02
+  - first:
+      74: 7400016
+    second: aim_fire_scope_04@assault_rifle_02
+  - first:
+      74: 7400018
+    second: aim_in@assault_rifle_02
+  - first:
+      74: 7400020
+    second: aim_in_scope_01@assault_rifle_02
+  - first:
+      74: 7400022
+    second: aim_in_scope_02@assault_rifle_02
+  - first:
+      74: 7400024
+    second: aim_in_scope_03@assault_rifle_02
+  - first:
+      74: 7400026
+    second: aim_in_scope_04@assault_rifle_02
+  - first:
+      74: 7400028
+    second: aim_out@assault_rifle_02
+  - first:
+      74: 7400030
+    second: aim_fire@assault_rifle_02
+  - first:
+      74: 7400032
+    second: aim_out_scope_01@assault_rifle_02
+  - first:
+      74: 7400034
+    second: aim_out_scope_02@assault_rifle_02
+  - first:
+      74: 7400036
+    second: aim_out_scope_03@assault_rifle_02
+  - first:
+      74: 7400038
+    second: aim_out_scope_04@assault_rifle_02
+  - first:
+      74: 7400040
+    second: fire@assault_rifle_02
+  - first:
+      74: 7400042
+    second: grenade_throw@assault_rifle_02
+  - first:
+      74: 7400044
+    second: holster_weapon@assault_rifle_02
+  - first:
+      74: 7400046
+    second: idle@assault_rifle_02
+  - first:
+      74: 7400048
+    second: inspect_weapon@assault_rifle_02
+  - first:
+      74: 7400050
+    second: knife_attack_1@assault_rifle_02
+  - first:
+      74: 7400052
+    second: knife_attack_2@assault_rifle_02
+  - first:
+      74: 7400054
+    second: Armature|pose_ref
+  - first:
+      74: 7400056
+    second: reload_ammo_left@assault_rifle_02
+  - first:
+      74: 7400058
+    second: reload_out_of_ammo@assault_rifle_02
+  - first:
+      74: 7400060
+    second: run@assault_rifle_02
+  - first:
+      74: 7400062
+    second: take_out_weapon@assault_rifle_02
+  - first:
+      74: 7400064
+    second: walk@assault_rifle_02
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: arms
+  - first:
+      137: 13700002
+    second: assault_rifle_02
+  - first:
+      137: 13700004
+    second: assault_rifle_02_iron_sights
+  - first:
+      137: 13700006
+    second: bullet
+  - first:
+      137: 13700008
+    second: knife 1
+  - first:
+      137: 13700010
+    second: scope_01
+  - first:
+      137: 13700012
+    second: scope_02
+  - first:
+      137: 13700014
+    second: scope_03
+  - first:
+      137: 13700016
+    second: scope_04
+  - first:
+      137: 13700018
+    second: silencer
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arms Material
+    second: {fileID: 2100000, guid: a5c25d33ff4fb084f90ccf3f0b3659b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Guns Material
+    second: {fileID: 2100000, guid: e11c4f3ee458bf446918382a2f5f9451, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -167,6 +469,8 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 0
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -178,6 +482,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_fire_pose@assault_rifle_02
       takeName: Armature|aim_fire_pose
+      internalID: 0
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -206,6 +511,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_fire_pose_scope_01@assault_rifle_02
       takeName: Armature|aim_fire_pose_scope_01
+      internalID: 0
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -234,6 +540,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_fire_pose_scope_02@assault_rifle_02
       takeName: Armature|aim_fire_pose_scope_02
+      internalID: 0
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -262,6 +569,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_fire_pose_scope_03@assault_rifle_02
       takeName: Armature|aim_fire_pose_scope_03
+      internalID: 0
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -290,6 +598,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_fire_pose_scope_04@assault_rifle_02
       takeName: Armature|aim_fire_pose_scope_04
+      internalID: 0
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0
@@ -318,6 +627,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_fire_scope_01@assault_rifle_02
       takeName: Armature|aim_fire_scope_01
+      internalID: 0
       firstFrame: 1
       lastFrame: 11
       wrapMode: 0
@@ -346,6 +656,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_fire_scope_02@assault_rifle_02
       takeName: Armature|aim_fire_scope_02
+      internalID: 0
       firstFrame: 1
       lastFrame: 11
       wrapMode: 0
@@ -374,6 +685,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_fire_scope_03@assault_rifle_02
       takeName: Armature|aim_fire_scope_03
+      internalID: 0
       firstFrame: 1
       lastFrame: 11
       wrapMode: 0
@@ -402,6 +714,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_fire_scope_04@assault_rifle_02
       takeName: Armature|aim_fire_scope_04
+      internalID: 0
       firstFrame: 1
       lastFrame: 11
       wrapMode: 0
@@ -430,6 +743,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_in@assault_rifle_02
       takeName: Armature|aim_in
+      internalID: 0
       firstFrame: 1
       lastFrame: 10
       wrapMode: 0
@@ -458,6 +772,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_in_scope_01@assault_rifle_02
       takeName: Armature|aim_in_scope_01
+      internalID: 0
       firstFrame: 1
       lastFrame: 10
       wrapMode: 0
@@ -486,6 +801,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_in_scope_02@assault_rifle_02
       takeName: Armature|aim_in_scope_02
+      internalID: 0
       firstFrame: 1
       lastFrame: 10
       wrapMode: 0
@@ -514,6 +830,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_in_scope_03@assault_rifle_02
       takeName: Armature|aim_in_scope_03
+      internalID: 0
       firstFrame: 1
       lastFrame: 10
       wrapMode: 0
@@ -542,6 +859,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_in_scope_04@assault_rifle_02
       takeName: Armature|aim_in_scope_04
+      internalID: 0
       firstFrame: 1
       lastFrame: 10
       wrapMode: 0
@@ -570,6 +888,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_out@assault_rifle_02
       takeName: Armature|aim_out
+      internalID: 0
       firstFrame: 1
       lastFrame: 12
       wrapMode: 0
@@ -590,7 +909,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.95962733
+        functionName: SetLayer
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -598,6 +924,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_fire@assault_rifle_02
       takeName: Armature|aim_fire
+      internalID: 0
       firstFrame: 1
       lastFrame: 11
       wrapMode: 0
@@ -626,6 +953,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_out_scope_01@assault_rifle_02
       takeName: Armature|aim_out_scope_01
+      internalID: 0
       firstFrame: 1
       lastFrame: 12
       wrapMode: 0
@@ -654,6 +982,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_out_scope_02@assault_rifle_02
       takeName: Armature|aim_out_scope_02
+      internalID: 0
       firstFrame: 1
       lastFrame: 12
       wrapMode: 0
@@ -682,6 +1011,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_out_scope_03@assault_rifle_02
       takeName: Armature|aim_out_scope_03
+      internalID: 0
       firstFrame: 1
       lastFrame: 12
       wrapMode: 0
@@ -710,6 +1040,7 @@ ModelImporter:
     - serializedVersion: 16
       name: aim_out_scope_04@assault_rifle_02
       takeName: Armature|aim_out_scope_04
+      internalID: 0
       firstFrame: 1
       lastFrame: 12
       wrapMode: 0
@@ -738,6 +1069,7 @@ ModelImporter:
     - serializedVersion: 16
       name: fire@assault_rifle_02
       takeName: Armature|fire
+      internalID: 0
       firstFrame: 1
       lastFrame: 26
       wrapMode: 0
@@ -766,6 +1098,7 @@ ModelImporter:
     - serializedVersion: 16
       name: grenade_throw@assault_rifle_02
       takeName: Armature|grenade_throw
+      internalID: 0
       firstFrame: 1
       lastFrame: 35
       wrapMode: 0
@@ -794,6 +1127,7 @@ ModelImporter:
     - serializedVersion: 16
       name: holster_weapon@assault_rifle_02
       takeName: Armature|holster_weapon
+      internalID: 0
       firstFrame: 1
       lastFrame: 15
       wrapMode: 0
@@ -822,6 +1156,7 @@ ModelImporter:
     - serializedVersion: 16
       name: idle@assault_rifle_02
       takeName: Armature|idle
+      internalID: 0
       firstFrame: 1
       lastFrame: 60
       wrapMode: 0
@@ -850,6 +1185,7 @@ ModelImporter:
     - serializedVersion: 16
       name: inspect_weapon@assault_rifle_02
       takeName: Armature|inspect_weapon
+      internalID: 0
       firstFrame: 1
       lastFrame: 130
       wrapMode: 0
@@ -878,6 +1214,7 @@ ModelImporter:
     - serializedVersion: 16
       name: knife_attack_1@assault_rifle_02
       takeName: Armature|knife_attack_1
+      internalID: 0
       firstFrame: 1
       lastFrame: 74
       wrapMode: 0
@@ -906,6 +1243,7 @@ ModelImporter:
     - serializedVersion: 16
       name: knife_attack_2@assault_rifle_02
       takeName: Armature|knife_attack_2
+      internalID: 0
       firstFrame: 1
       lastFrame: 30
       wrapMode: 0
@@ -934,6 +1272,7 @@ ModelImporter:
     - serializedVersion: 16
       name: reload_ammo_left@assault_rifle_02
       takeName: Armature|reload_ammo_left
+      internalID: 0
       firstFrame: 1
       lastFrame: 68
       wrapMode: 0
@@ -954,7 +1293,28 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.024844721
+        functionName: SetState
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
+      - time: 0.77018636
+        functionName: SetState
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 2
+        messageOptions: 0
+      - time: 0.98447204
+        functionName: ReloadAmmo
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -962,6 +1322,7 @@ ModelImporter:
     - serializedVersion: 16
       name: reload_out_of_ammo@assault_rifle_02
       takeName: Armature|reload_out_of_ammo
+      internalID: 0
       firstFrame: 1
       lastFrame: 96
       wrapMode: 0
@@ -982,7 +1343,28 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.04347826
+        functionName: SetState
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
+      - time: 0.8633541
+        functionName: SetState
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 2
+        messageOptions: 0
+      - time: 0.9813664
+        functionName: ReloadAmmo
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -990,6 +1372,7 @@ ModelImporter:
     - serializedVersion: 16
       name: run@assault_rifle_02
       takeName: Armature|run
+      internalID: 0
       firstFrame: 0
       lastFrame: 24
       wrapMode: 0
@@ -1018,6 +1401,7 @@ ModelImporter:
     - serializedVersion: 16
       name: take_out_weapon@assault_rifle_02
       takeName: Armature|take_out_weapon
+      internalID: 0
       firstFrame: 1
       lastFrame: 40
       wrapMode: 0
@@ -1038,7 +1422,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.0124223605
+        functionName: SetState
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
+      - time: 0.93167704
+        functionName: SetState
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 2
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -1046,6 +1444,7 @@ ModelImporter:
     - serializedVersion: 16
       name: walk@assault_rifle_02
       takeName: Armature|walk
+      internalID: 0
       firstFrame: 1
       lastFrame: 24
       wrapMode: 0
@@ -1077,6 +1476,8 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -1084,9 +1485,14 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -1097,10 +1503,14 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -1110,8 +1520,8 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

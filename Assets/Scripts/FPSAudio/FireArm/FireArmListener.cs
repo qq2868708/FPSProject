@@ -11,8 +11,20 @@ public class FireArmListener : MonoBehaviour
     [SerializeField]
     private FireArmAudio audioClips;
 
-    public AudioSource audioReload;
-    public AudioSource audioShoot;
+    public AudioSource audioSource;
+
+    private string dataPath;
+
+    private void Awake()
+    {
+        dataPath = "ScriptableObjects/FPS Fire Arm Audio";
+        audios =Resources.Load<FPSFireArmAudio>(dataPath);
+    }
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void SetAudio(string audioName)
     {
@@ -35,18 +47,18 @@ public class FireArmListener : MonoBehaviour
         }
         if(audioType=="reloadLeft")
         {
-            audioReload.clip = audioClips.reloadLeft;
-            audioReload.Play();
+            audioSource.clip = audioClips.reloadLeft;
+            audioSource.Play();
         }
         else if (audioType == "reloadOutof")
         {
-            audioReload.clip = audioClips.reloadOutof;
-            audioReload.Play();
+            audioSource.clip = audioClips.reloadOutof;
+            audioSource.Play();
         }
         else if (audioType == "shoot")
         {
-            audioShoot.clip = audioClips.shootAudio;
-            audioShoot.Play();
+            audioSource.clip = audioClips.shootAudio;
+            audioSource.Play();
         }
 
     }
