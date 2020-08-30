@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
             if(hit.collider.gameObject!=this.gameObject)
             {
                 //产生特效并在一定时间后让对象池回收
-                var tmp = instance.CreatObject("BulletEffect", bulletEffect);
+                var tmp = instance.CreateObject("BulletEffect", bulletEffect);
                 tmp.transform.rotation = Quaternion.LookRotation(hit.normal);
                 tmp.transform.position = hit.point;
                 instance.CollectGameObject(tmp, 2);

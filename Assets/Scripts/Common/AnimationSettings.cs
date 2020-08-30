@@ -13,6 +13,7 @@ public static class AnimationSettings
     public static string reloadLeft = "ReloadLeft";
     public static string aim = "Aim";
     public static string fire = "Fire";
+    public static string holster = "Holster";
 
     //适用于大狙
     public static string reloadOnce = "ReloadOnce";

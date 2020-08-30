@@ -23,10 +23,12 @@ public class WeaponManager : MonoBehaviour
     public string specialWeaponStr = "SpecialWeapon";
 
     //管理所用可用武器，包括主，副武器，所有武器类型都会被注册但是武器可能不存在
+    [SerializeField]
     private Dictionary<string, FireArm> weaponDict = new Dictionary<string, FireArm>();
     //将武器和管理他们的transform建立关系，如果没有武器，就不在此字典注册
+    [SerializeField]
     private Dictionary<FireArm, Transform> transformDic = new Dictionary<FireArm, Transform>();
-
+    [SerializeField]
     private Dictionary<string, Transform> weaponTransform = new Dictionary<string, Transform>();
 
     //实际拥有的武器列表，全部非空
@@ -41,6 +43,9 @@ public class WeaponManager : MonoBehaviour
     //当前武器索引，用于鼠标滚轮切换武器
     [SerializeField]
     private int currentIndex;
+
+    //所有武器的直接父级
+    public Transform weaponHolder;
 
     public int testInt;
 
@@ -65,9 +70,10 @@ public class WeaponManager : MonoBehaviour
         weaponDict.Clear();
         weaponList.Clear();
         weaponTransform.Clear();
-        mainWeaponTransform = TransformHelper.FindChild(this.transform, "MainWeapon");
-        secondaryWeaponTransform = TransformHelper.FindChild(this.transform, "SecondaryWeapon");
-        specialWeaponTransform = TransformHelper.FindChild(this.transform, "SpecialWeapon");
+        mainWeaponTransform = TransformHelper.FindChild(weaponHolder, "MainWeapon");
+        secondaryWeaponTransform = TransformHelper.FindChild(weaponHolder, "SecondaryWeapon");
+        specialWeaponTransform = TransformHelper.FindChild(weaponHolder, "SpecialWeapon");
+        //对主武器赋值
         if(mainWeaponTransform!=null)
         {
             weaponTransform.Add("MainWeapon", mainWeaponTransform);
@@ -76,6 +82,11 @@ public class WeaponManager : MonoBehaviour
             weaponDict.Add("MainWeapon", mainWeapon);
             weaponList.Add("MainWeapon");
         }
+        else
+        {
+            mainWeapon = null;
+        }
+        //对副武器赋值
         if(secondaryWeaponTransform!=null)
         {
             weaponTransform.Add("Secondary", secondaryWeaponTransform);
@@ -85,13 +96,22 @@ public class WeaponManager : MonoBehaviour
             weaponList.Add("SecondaryWeapon");
 
         }
+        else
+        {
+            secondaryWeapon = null;
+        }
+        //对特殊武器赋值
         if (specialWeaponTransform!=null)
         {
             weaponTransform.Add("SpecialWeapon", specialWeaponTransform);
             specialWeapon = specialWeaponTransform.GetComponentInChildren<FireArm>();
             transformDic.Add(specialWeapon, specialWeaponTransform);
             weaponDict.Add("SpecialWeapon", specialWeapon);
-            weaponList.Add("SecondaryWeapon");
+            weaponList.Add("SpecialWeapon");
+        }
+        else
+        {
+            specialWeapon = null;
         }
     }
 
@@ -158,32 +178,37 @@ public class WeaponManager : MonoBehaviour
         //瞄准
         if (Input.GetKeyDown(InputSettings.Aim))
         {
-            currentWeapon.Aim();
+            currentWeapon.Aim(true);
         }
         else if (Input.GetKeyUp(InputSettings.Aim))
         {
-            currentWeapon.Aim();
+            currentWeapon.Aim(false);
         }
 
         //切换武器
         if (Input.GetKeyDown(InputSettings.MainWeapon))
         {
-            SwapWeapon(0);
+            StartCoroutine( SwapWeapon(0));
         }
         else if (Input.GetKeyDown(InputSettings.SecondaryWeapon))
         {
-            SwapWeapon(1);
+            StartCoroutine( SwapWeapon(1));
+        }
+        else if (Input.GetKeyDown(InputSettings.SpecialWeapon))
+        {
+            StartCoroutine(SwapWeapon(2));
         }
 
         //鼠标滚轮切换武器
-        if(Input.GetAxisRaw(InputSettings.MouseScrollWheel)>0)
+        if (Input.GetAxisRaw(InputSettings.MouseScrollWheel)>0)
         {
             currentIndex++;
-            SwapWithMouse();
+            currentIndex = currentIndex % weaponList.Count;
+            StartCoroutine(SwapWithMouse());
         }
         else if (Input.GetAxisRaw(InputSettings.MouseScrollWheel)<0)
         {
-            if (currentIndex < 1)
+            if (currentIndex <= 0)
             {
                 currentIndex = weaponList.Count-1;
             }
@@ -191,7 +216,7 @@ public class WeaponManager : MonoBehaviour
             {
                 currentIndex--;
             }
-            SwapWithMouse();
+            StartCoroutine(SwapWithMouse());
         }
 
         //丢弃武器
@@ -199,11 +224,10 @@ public class WeaponManager : MonoBehaviour
         {
             DropWeapon();
         }
-
     }
 
-    //根据索引切换武器
-    public void SwapWeapon(int index)
+    //根据索引切换武器,index不会超出范围
+    public IEnumerator SwapWeapon(int index)
     {
         switch(index)
         {
@@ -212,6 +236,7 @@ public class WeaponManager : MonoBehaviour
                     //切换的是另一把武器，且武器不为空
                     if(currentWeapon!= mainWeapon && weaponDict["MainWeapon"] != null)
                     {
+                        yield return SwapWeaponAnimation();
                         currentWeaponTransform.gameObject.SetActive(false);
                         currentWeaponTransform = mainWeaponTransform;
                         currentWeapon = mainWeapon;
@@ -225,6 +250,7 @@ public class WeaponManager : MonoBehaviour
                 {
                     if (currentWeapon != secondaryWeapon && weaponDict["SecondaryWeapon"]!=null)
                     {
+                        yield return SwapWeaponAnimation();
                         currentWeaponTransform.gameObject.SetActive(false);
                         currentWeaponTransform = secondaryWeaponTransform;
                         currentWeapon = secondaryWeapon;
@@ -235,6 +261,7 @@ public class WeaponManager : MonoBehaviour
                 }
             case 2:
                 {
+                    yield return SwapWeaponAnimation();
                     if (currentWeapon != specialWeapon && weaponDict["SpecialWeapon"] != null)
                     {
                         currentWeaponTransform.gameObject.SetActive(false);
@@ -249,15 +276,25 @@ public class WeaponManager : MonoBehaviour
     }
 
     //滚轮切换武器
-    public void SwapWithMouse()
+    public IEnumerator SwapWithMouse()
     {
-        currentIndex = Mathf.Abs(currentIndex) % weaponList.Count;
-        SwapWeapon(currentIndex);
+        var weaponType = weaponList[currentIndex];
+        var next_weapon = weaponDict[weaponType];
+        yield return SwapWeaponAnimation();
+        currentWeaponTransform.gameObject.SetActive(false);
+        currentWeaponTransform = transformDic[next_weapon];
+        currentWeapon = next_weapon;
+        currentWeaponTransform.gameObject.SetActive(true);
     }
 
-    public void AddNewWeapon(FireArm fireArm)
+    //添加新武器
+    public void AddNewWeapon(string weaponName, string gunType, GameObject gunPrefab)
     {
-
+        var newWeapon = GameObjectPool.instance.CreateObject(weaponName,gunType,gunPrefab);
+        newWeapon.transform.SetParent(weaponHolder);
+        newWeapon.SetActive(true);
+        newWeapon.transform.localPosition = new Vector3(0, 0, 0);
+        newWeapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
 
     //判断是否可以丢弃武器，如果可以让对象池回收以节省性能，并设置下一把活动武器，如果不行则不执行
@@ -272,18 +309,23 @@ public class WeaponManager : MonoBehaviour
         currentWeaponTransform.gameObject.SetActive(false);
         GameObjectPool.instance.CollectGameObject(currentWeaponTransform.gameObject);
 
+
+        CollectWeapon();
         currentIndex--;
         if(currentIndex<0)
         {
             currentIndex = 0;
         }
-        CollectWeapon();
+
         currentWeapon = weaponDict[weaponList[currentIndex]];
         currentWeaponTransform = transformDic[currentWeapon];
         currentWeaponTransform.gameObject.SetActive(true);
         
     }
 
-   
-    
+    private IEnumerator SwapWeaponAnimation()
+    {
+        yield return currentWeapon.SwapWeapon();
+    }
+
 }

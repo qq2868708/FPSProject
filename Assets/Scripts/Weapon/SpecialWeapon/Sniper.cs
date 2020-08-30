@@ -5,7 +5,7 @@ public class Sniper : FireArm
 {
     private FPSMouseLook mouseLook;
 
-    //大狙有个单独的声音，后期再考虑另外配置
+    //大狙有个单独的声音，即每次开枪以后的上膛声音，后期再考虑另外配置
     public AudioClip clip;
 
     // Use this for initialization
@@ -55,9 +55,9 @@ public class Sniper : FireArm
     }
 
     //瞄准
-    public override void Aim()
+    public override void Aim(bool aim)
     {
-        isAiming = !isAiming;
+        isAiming = aim;
         if (isAiming)
         {
             controller.playerAnimator.SetLayerWeight(2, 1);
@@ -110,7 +110,7 @@ public class Sniper : FireArm
         {
             controller.playerAnimator.SetLayerWeight(2, 0);
             controller.playerAnimator.SetLayerWeight(1, 1);
-            //大狙只有一发子弹
+            //大狙一发子弹装填一次，所以包含多个音效
             controller.playerAnimator.SetTrigger(AnimationSettings.reloadOnce);
             listener.PlayAudio("reloadLeft");
         }

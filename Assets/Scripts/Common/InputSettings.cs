@@ -14,8 +14,10 @@ public static class InputSettings
     public static KeyCode Aim = KeyCode.Mouse1;
     public static KeyCode MainWeapon = KeyCode.Alpha1;
     public static KeyCode SecondaryWeapon = KeyCode.Alpha2;
+    public static KeyCode SpecialWeapon = KeyCode.Alpha3;
 
     public static string MouseScrollWheel = "Mouse ScrollWheel";
 
     public static KeyCode DropWeapon = KeyCode.G;
+    public static KeyCode Interact = KeyCode.F;
 }

@@ -24,7 +24,41 @@ public class GameObjectPool : MonoBehaviour
         }
     }
 
-    public GameObject CreatObject(string objName, GameObject obj)
+    /// <summary>
+    /// 创建武器的对象并返回
+    /// </summary>
+    /// <param name="name">需要的武器名字，如AK47</param>
+    /// <param name="gunType">该武器的种类，如MainWeapon</param>
+    /// <param name="obj">传入武器的预设</param>
+    /// <returns></returns>
+    public GameObject CreateObject( string weaponName,string gunType,GameObject obj)
+    {
+        //判断该类对象有没有收到管理，创建一个新对象纳入管理并返回
+        if (!dict.ContainsKey(gunType))
+        {
+            var obj_List = dict[gunType];
+            return obj_List.Find(o => o.transform.GetChild(0).name == weaponName);
+        }
+        else
+        {
+            var tmp_list = dict[gunType].FindAll(o => o.transform.GetChild(0).name == weaponName);
+            var tmp_obj = CheckUsage(tmp_list);
+            if (tmp_obj)
+            {
+                //找到了空闲对象，则返回
+                return tmp_obj;
+            }
+            else
+            {
+                dict[gunType].Add(obj);
+                var tmp_gun = Instantiate(obj);
+                return obj;
+            }
+            
+        }
+    }
+
+    public GameObject CreateObject(string objName, GameObject obj)
     {
         //如果对象池已经管理了该对象
         if (dict.ContainsKey(objName))
@@ -60,6 +94,8 @@ public class GameObjectPool : MonoBehaviour
         }
     }
 
+    
+
     //检测有无空闲对象
     public GameObject CheckUsage(List<GameObject> list)
     {
@@ -73,9 +109,20 @@ public class GameObjectPool : MonoBehaviour
         return null;
     }
 
-    //回收对象
+    //回收对象，如果回收的对象不在对象池的控制范围则添加
     public void CollectGameObject(GameObject obj)
     {
+        //是否被对象池控制
+        if(dict.ContainsKey(obj.name))
+        {
+            dict[obj.name].Add(obj);
+        }
+        else
+        {
+            //如果不被控制新建键值对使其受控
+            dict.Add(obj.name, new List<GameObject>());
+            dict[obj.name].Add(obj);
+        }
         obj.SetActive(false);
     }
 

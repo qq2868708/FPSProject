@@ -13,7 +13,7 @@ public class FPSMouseLook : MonoBehaviour
     private float inputTempX;
     private float inputTempY;
 
-    private Transform camera;
+    private Transform Mousecamera;
     private Vector3 cameraRotation;
     public Vector2 LimitY;
     public Transform player;
@@ -30,7 +30,7 @@ public class FPSMouseLook : MonoBehaviour
 
     private void Start()
     {
-        camera = this.gameObject.transform;
+        Mousecamera = this.gameObject.transform;
         cameraShakeController = GetComponentInChildren<CameraShakeController>();
     }
 
@@ -52,7 +52,7 @@ public class FPSMouseLook : MonoBehaviour
 
         cameraRotation.y = Mathf.Clamp(cameraRotation.y, LimitY.x, LimitY.y);
 
-        camera.rotation = Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0);
+        Mousecamera.rotation = Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0);
         player.rotation = Quaternion.Euler(0,cameraRotation.x, 0);
     }
 

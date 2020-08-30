@@ -42,7 +42,7 @@ public abstract class FireArm : MonoBehaviour,IWeapon
 
     public bool isAiming;
 
-    //弹道散射角度
+    //弹道散射角度，非0值，0值报错，做除数
     public float SpreadAngle;
 
     protected virtual void Start()
@@ -94,7 +94,7 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     
     }
 
-    public abstract void Aim();
+    public abstract void Aim(bool aim);
 
     public virtual bool IsAllowShoot()
     {
@@ -111,10 +111,10 @@ public abstract class FireArm : MonoBehaviour,IWeapon
 
     public void CreatBullet()
     {
-        var tmp_obj = GameObjectPool.instance.CreatObject("Bullet",bullet);
+        var tmp_obj = GameObjectPool.instance.CreateObject("Bullet",bullet);
         tmp_obj.transform.position = muzzlePoint.position;
         tmp_obj.transform.rotation = muzzlePoint.rotation;
-        //stmp_obj.transform.eulerAngles += CaculateSpreadBullet();
+        tmp_obj.transform.eulerAngles += CaculateSpreadBullet();
         tmp_obj.GetComponent<Rigidbody>().velocity = tmp_obj.transform.forward * 100;
     }
 
@@ -158,5 +158,32 @@ public abstract class FireArm : MonoBehaviour,IWeapon
             currentAmmoCarried = 0;
         }
         controller.playerAnimator.SetLayerWeight(1, 0);
+    }
+
+    public virtual IEnumerator SwapWeapon()
+    {
+        for(int i=0; i< controller.playerAnimator.layerCount; i++)
+        {
+            controller.playerAnimator.SetLayerWeight(i, 0);
+        }
+        controller.playerAnimator.SetLayerWeight(0, 1);
+        isAiming = false;
+        isReady = false;
+        controller.playerAnimator.SetTrigger(AnimationSettings.holster);
+        yield return info();
+    }
+
+    private IEnumerator info()
+    {
+        while (true)
+        {
+            yield return null;
+            AnimatorStateInfo tmp_AnimatorStateInfo = controller.playerAnimator.GetCurrentAnimatorStateInfo(0);
+            if (tmp_AnimatorStateInfo.normalizedTime > 0.9f)
+            {
+                isReady = true;
+                break;
+            }
+        }
     }
 }

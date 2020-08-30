@@ -53,9 +53,9 @@ public class AssaultRifle : FireArm
     }
 
     //瞄准
-    public override void Aim()
+    public override void Aim(bool aim)
     {
-        isAiming = !isAiming;
+        isAiming = aim;
         if (isAiming)
         {
             controller.playerAnimator.SetLayerWeight(2, 1);
