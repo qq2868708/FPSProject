@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5350035274474463792}
   - component: {fileID: 5351656770167043878}
   - component: {fileID: 5360782503885317170}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assault_Rifle_01_Iron_Sights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,6 +54,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -89,7 +90,7 @@ GameObject:
   - component: {fileID: 5341576253924211494}
   - component: {fileID: 5351486439780417560}
   - component: {fileID: 5360372377042811292}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assault_Rifle_01_Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,6 +133,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -167,7 +169,7 @@ GameObject:
   - component: {fileID: 5341549800408845702}
   - component: {fileID: 5352842205287020168}
   - component: {fileID: 5359378540887521916}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Assault_Rifle_01_Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,6 +212,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -245,7 +248,7 @@ GameObject:
   - component: {fileID: 5349748333440365984}
   - component: {fileID: 5352862719825112846}
   - component: {fileID: 5360265735797025360}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AK47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,6 +294,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -324,9 +328,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8235958993895416036}
-  - component: {fileID: 62773631}
   - component: {fileID: 62773632}
-  m_Layer: 0
+  - component: {fileID: 5268507078613792715}
+  - component: {fileID: 62773631}
+  m_Layer: 9
   m_Name: AK47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,27 +345,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8522536467740039059}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.028934598, y: -0.04528384, z: -0.010335565}
+  m_LocalRotation: {x: -0, y: -0.23298562, z: 0, w: 0.9724802}
+  m_LocalPosition: {x: -0.22346795, y: 9.283003, z: -30.338243}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5349748333440365984}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &62773631
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8522536467740039059}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &62773632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,8 +365,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4d4eba4dbf04f5e82ace6d8ec1a145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  manager: {fileID: 0}
+  gun: {fileID: 1852210396420443830, guid: 31211778f0847432094ac9f4e435912d, type: 3}
   weaponName: 
-  gun: {fileID: 8522536467740039059}
   gunType: 
+  currentInMag: 30
+  currentMagCarried: 120
+--- !u!54 &5268507078613792715
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8522536467740039059}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &62773631
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8522536467740039059}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04847634, y: 0.31258774, z: 1}
+  m_Center: {x: 0.0018089414, y: -0.057887077, z: 0}

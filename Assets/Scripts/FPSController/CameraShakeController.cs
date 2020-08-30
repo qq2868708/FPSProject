@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-///
+/// 屏幕抖动
 /// </summary>
 public class CameraShakeController : MonoBehaviour
 {

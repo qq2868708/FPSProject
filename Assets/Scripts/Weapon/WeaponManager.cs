@@ -47,11 +47,13 @@ public class WeaponManager : MonoBehaviour
     //所有武器的直接父级
     public Transform weaponHolder;
 
-    public int testInt;
+    public Inventory inventory;
 
     //做一些初始化的设置
     private void InitManager()
     {
+        inventory = GetComponent<Inventory>();
+
         //统计当前的武器信息
         CollectWeapon();
 
@@ -60,6 +62,7 @@ public class WeaponManager : MonoBehaviour
         {
             transform.gameObject.SetActive(false);
         }
+        AddInventory();
         
     }
 
@@ -115,6 +118,15 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    //将武器信息放入inventory，用于管理
+    public void AddInventory()
+    {
+        foreach(var gunType in weaponList)
+        {
+            inventory.AddItem(gunType,weaponDict[gunType]);
+        }
+    }
+
     private void Start()
     {
         InitManager();
@@ -148,11 +160,7 @@ public class WeaponManager : MonoBehaviour
             currentWeaponTransform.gameObject.SetActive(true);
             currentIndex = 1;
         }
-        else
-        {
-            Debug.LogError("no Weapon");
-            return;
-        }
+       
     }
 
     private void Update()
@@ -290,25 +298,57 @@ public class WeaponManager : MonoBehaviour
     //添加新武器
     public void AddNewWeapon(string weaponName, string gunType, GameObject gunPrefab)
     {
+        //返回的是MainWeapon等的物体
         var newWeapon = GameObjectPool.instance.CreateObject(weaponName,gunType,gunPrefab);
+
+        //先把该武器调整到weaponholder下进行管理，再根据需求进行显影
+        if (weaponTransform.ContainsKey(gunType))
+        {
+            var weaponNeedToCollectTransform = weaponTransform[gunType];
+            GameObjectPool.instance.CollectGameObject(weaponNeedToCollectTransform.gameObject);
+            weaponNeedToCollectTransform.SetParent(GameObjectPool.instance.transform);
+        }
+        
+        //把新的武器的位置设置好
         newWeapon.transform.SetParent(weaponHolder);
-        newWeapon.SetActive(true);
+        newWeapon.GetComponentInChildren<FireArm>().weaponHolder = weaponHolder;
+        newWeapon.GetComponentInChildren<FireArm>().eyeCamera = TransformHelper.FindChild(weaponHolder, "Main Camera").GetComponent<Camera>();
         newWeapon.transform.localPosition = new Vector3(0, 0, 0);
         newWeapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+        //设置新的武器的弹药
+        newWeapon.GetComponentInChildren<FireArm>().currentAmmoCarried = inventory.inventoryDic[gunType].currentMagCarried;
+        newWeapon.GetComponentInChildren<FireArm>().currentAmmoInMag = inventory.inventoryDic[gunType].currentInMag;
+
+        //按照新的列表组织武器
+        CollectWeapon();
+
+        //由于武器列表按照优先级排序，永远显示当前索引即可
+        var weaponTypeNeedToActive = weaponList[currentIndex];
+        //判断，如果本身一把武器都没有（初始状态）
+        if(currentWeaponTransform!=null)
+        {
+            currentWeaponTransform.gameObject.SetActive(false);
+        }
+        currentWeaponTransform = weaponTransform[weaponTypeNeedToActive];
+        currentWeaponTransform.gameObject.SetActive(true);
+        currentWeapon = weaponDict[weaponTypeNeedToActive];
     }
 
     //判断是否可以丢弃武器，如果可以让对象池回收以节省性能，并设置下一把活动武器，如果不行则不执行
     public void DropWeapon()
     {
-        if(weaponList.Count==1)
-        {
-            return;
-        }
+        //if(weaponList.Count==1)
+        //{
+        //    return;
+        //}
+
         //移除武器
         currentWeaponTransform.SetParent(GameObjectPool.instance.transform);
         currentWeaponTransform.gameObject.SetActive(false);
         GameObjectPool.instance.CollectGameObject(currentWeaponTransform.gameObject);
 
+        inventory.DropItem(currentWeaponTransform.name,currentWeapon.GetComponent<FireArm>());
 
         CollectWeapon();
         currentIndex--;
@@ -316,16 +356,20 @@ public class WeaponManager : MonoBehaviour
         {
             currentIndex = 0;
         }
-
+        if(weaponList.Count==0)
+        {
+            currentWeapon = null;
+            currentWeaponTransform = null;
+            return;
+        }
         currentWeapon = weaponDict[weaponList[currentIndex]];
         currentWeaponTransform = transformDic[currentWeapon];
         currentWeaponTransform.gameObject.SetActive(true);
-        
+
     }
 
     private IEnumerator SwapWeaponAnimation()
     {
         yield return currentWeapon.SwapWeapon();
     }
-
 }

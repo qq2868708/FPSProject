@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-///
+/// 后坐力
 /// </summary>
 
 public class FPSMouseLook : MonoBehaviour

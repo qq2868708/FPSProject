@@ -8,42 +8,32 @@ public enum WeaponType
     SpecialWeapon,
 }
 
-public class GunItem : MonoBehaviour,IPickableObject
+public class GunItem : Item
 {
-    [SerializeField]
-    private GameObject player;
-    [SerializeField]
-    private WeaponManager manager;
-    public string weaponName;
-
+    //这是武器的预设
     public GameObject gun;
+    public string weaponName;
     public string gunType;
+
+    public int currentInMag;
+    public int currentMagCarried;
 
     // Use this for initialization
     void Start()
     {
-        player = null;
-        manager = null;
+        //获取武器的种类和武器的名字
         weaponName = this.transform.GetChild(0).name;
         gunType = gun.name;
     }
 
    
 
-    public void Pick()
+    public override void Pick()
     {
-        manager.AddNewWeapon(weaponName,gunType,gun);
+        
     }
 
   
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            player = other.gameObject;
-
-            manager = player.GetComponent<WeaponManager>();
-        }
-    }
+   
 }

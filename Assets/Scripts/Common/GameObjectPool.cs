@@ -36,8 +36,11 @@ public class GameObjectPool : MonoBehaviour
         //判断该类对象有没有收到管理，创建一个新对象纳入管理并返回
         if (!dict.ContainsKey(gunType))
         {
-            var obj_List = dict[gunType];
-            return obj_List.Find(o => o.transform.GetChild(0).name == weaponName);
+            dict.Add(gunType, new List<GameObject>());
+            var tmp_gun = Instantiate(obj);
+            dict[gunType].Add(tmp_gun);
+            tmp_gun.name = tmp_gun.name.Remove(tmp_gun.name.Length - 7);
+            return tmp_gun;
         }
         else
         {
@@ -76,6 +79,7 @@ public class GameObjectPool : MonoBehaviour
             {
                 //没有空闲对象，则新建一个对象并交给对象池统一管理
                 tmp_obj = Instantiate(obj);
+                tmp_obj.name = tmp_obj.name.Remove(tmp_obj.name.Length - 7);
                 tmp_list.Add(tmp_obj);
                 tmp_obj.transform.parent = this.transform;
                 tmp_obj.SetActive(true);
@@ -87,6 +91,7 @@ public class GameObjectPool : MonoBehaviour
             //该类对象没有交给对象池管理，则在对象池字典中注册，并产生一个新的对象返回给调用者
             dict.Add(objName, new List<GameObject>());
             var tmp_obj = Instantiate(obj);
+            tmp_obj.name = tmp_obj.name.Remove(tmp_obj.name.Length - 7);
             dict[objName].Add(tmp_obj);
             tmp_obj.transform.parent = this.transform;
             tmp_obj.SetActive(true);

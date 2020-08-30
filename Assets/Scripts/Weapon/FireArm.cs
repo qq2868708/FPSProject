@@ -45,14 +45,25 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     //弹道散射角度，非0值，0值报错，做除数
     public float SpreadAngle;
 
-    protected virtual void Start()
+    //武器挂载点
+    public Transform weaponHolder;
+
+    //该手臂对应的武器，是一个可以在场景中显示的可以捡起的道具
+    public GameObject prefab;
+
+    //如果使用Instantiate方法，必须写在Awake里，有严格的调用时机的区别，instantiate中awake会立刻执行，而start会延迟执行，导致有些赋值无效
+    private void Awake()
     {
         currentAmmoInMag = ammoInMag;
         currentAmmoCarried = MaxAmmorCarried;
+    }
+
+    protected virtual void Start()
+    {
         controller = GetComponent<FPSAnimatorController>();
         controller.Weapon = this;
         listener = GetComponent<FireArmListener>();
-        eyeCamera = TransformHelper.FindChild(this.transform, "Main Camera").GetComponent<Camera>();
+        eyeCamera = TransformHelper.FindChild(weaponHolder, "Main Camera").GetComponent<Camera>();
         originalFOV = eyeCamera.fieldOfView;
 
         muzzlePoint = TransformHelper.FindChild(this.transform, "MuzzlePoint");
@@ -149,8 +160,9 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     {
         if (currentAmmoCarried >= ammoInMag)
         {
+            currentAmmoCarried = currentAmmoCarried + currentAmmoInMag-ammoInMag;
             currentAmmoInMag = ammoInMag;
-            currentAmmoCarried -= ammoInMag;
+            
         }
         else if (currentAmmoCarried != 0)
         {

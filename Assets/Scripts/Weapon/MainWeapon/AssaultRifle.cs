@@ -9,7 +9,6 @@ public class AssaultRifle : FireArm
     protected override void Start()
     {
         base.Start();
-        Debug.Log(weapn_Name);
         listener.SetAudio(weapn_Name);
         mouseLook = FindObjectOfType<FPSMouseLook>();
     }

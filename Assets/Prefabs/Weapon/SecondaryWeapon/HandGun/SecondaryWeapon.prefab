@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0.99999994}
   m_Children: []
   m_Father: {fileID: 3269428701358800060}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3262875646106424240
 GameObject:
@@ -168,6 +168,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -229,7 +230,7 @@ SkinnedMeshRenderer:
   - {fileID: 3260755959939566682}
   - {fileID: 3269192724375007572}
   - {fileID: 3260700741734564622}
-  - {fileID: 3260683092350477502}
+  - {fileID: 0}
   - {fileID: 3269235200374154132}
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3269115350298942962}
@@ -287,6 +288,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -348,7 +350,7 @@ SkinnedMeshRenderer:
   - {fileID: 3260755959939566682}
   - {fileID: 3269192724375007572}
   - {fileID: 3260700741734564622}
-  - {fileID: 3260683092350477502}
+  - {fileID: 0}
   - {fileID: 3269235200374154132}
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3269115350298942962}
@@ -417,7 +419,6 @@ Transform:
   - {fileID: 3269115350298942962}
   - {fileID: 3269511678113710796}
   - {fileID: 3269441036422908712}
-  - {fileID: 3260683092350477502}
   - {fileID: 3269192724375007572}
   - {fileID: 3260700741734564622}
   - {fileID: 3269235200374154132}
@@ -513,6 +514,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -565,82 +567,8 @@ Transform:
   m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
   m_Children: []
   m_Father: {fileID: 3269428701358800060}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3263069708333611822
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3269591453176003998}
-  - component: {fileID: 3244770641663115598}
-  m_Layer: 8
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3269591453176003998
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3263069708333611822}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3260683092350477502}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &3244770641663115598
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3263069708333611822}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.277952, g: 0.32141185, b: 0.3897059, a: 0.019607844}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.01
-  far clip plane: 1000
-  field of view: 55
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967039
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
 --- !u!1 &3263072128696233000
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +645,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -778,7 +707,7 @@ SkinnedMeshRenderer:
   - {fileID: 3260755959939566682}
   - {fileID: 3269192724375007572}
   - {fileID: 3260700741734564622}
-  - {fileID: 3260683092350477502}
+  - {fileID: 0}
   - {fileID: 3269235200374154132}
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3269115350298942962}
@@ -814,7 +743,7 @@ Transform:
   m_LocalScale: {x: 0.9999999, y: 1.0000002, z: 1.0000002}
   m_Children: []
   m_Father: {fileID: 3269428701358800060}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3263109396357201538
 GameObject:
@@ -844,7 +773,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3269428701358800060}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3263373018587357926
 GameObject:
@@ -891,6 +820,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -952,7 +882,7 @@ SkinnedMeshRenderer:
   - {fileID: 3260755959939566682}
   - {fileID: 3269192724375007572}
   - {fileID: 3260700741734564622}
-  - {fileID: 3260683092350477502}
+  - {fileID: 0}
   - {fileID: 3269235200374154132}
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3269115350298942962}
@@ -1197,9 +1127,10 @@ MonoBehaviour:
   bullet: {fileID: 4792577774353629631, guid: 822d2cf70b76a456e886117592f51f86, type: 3}
   listener: {fileID: 0}
   originalFOV: 0
-  eyeCamera: {fileID: 3244770641663115598}
+  eyeCamera: {fileID: 0}
   isAiming: 0
   SpreadAngle: 40
+  weaponHolder: {fileID: 0}
 --- !u!114 &3263440868549797020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1380,6 +1311,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1488,6 +1420,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1572,7 +1505,7 @@ Transform:
   - {fileID: 3269438064394091298}
   - {fileID: 3261152955339935730}
   m_Father: {fileID: 3269428701358800060}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3263539653868671510
 GameObject:
@@ -1619,6 +1552,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1680,7 +1614,7 @@ SkinnedMeshRenderer:
   - {fileID: 3260755959939566682}
   - {fileID: 3269192724375007572}
   - {fileID: 3260700741734564622}
-  - {fileID: 3260683092350477502}
+  - {fileID: 0}
   - {fileID: 3269235200374154132}
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3269115350298942962}
@@ -1794,6 +1728,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1855,7 +1790,7 @@ SkinnedMeshRenderer:
   - {fileID: 3260755959939566682}
   - {fileID: 3269192724375007572}
   - {fileID: 3260700741734564622}
-  - {fileID: 3260683092350477502}
+  - {fileID: 0}
   - {fileID: 3269235200374154132}
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3269115350298942962}
@@ -1908,6 +1843,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1988,6 +1924,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2049,7 +1986,7 @@ SkinnedMeshRenderer:
   - {fileID: 3260755959939566682}
   - {fileID: 3269192724375007572}
   - {fileID: 3260700741734564622}
-  - {fileID: 3260683092350477502}
+  - {fileID: 0}
   - {fileID: 3269235200374154132}
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3269115350298942962}
@@ -2319,6 +2256,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2354,37 +2292,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &3263841869062373064
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3260683092350477502}
-  m_Layer: 8
-  m_Name: camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3260683092350477502
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3263841869062373064}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.4671271e-16, y: 0.17866261, z: 1.0855757}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
-  m_Children:
-  - {fileID: 3269591453176003998}
-  m_Father: {fileID: 3269428701358800060}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3263869503215230996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,6 +2432,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2586,7 +2494,7 @@ SkinnedMeshRenderer:
   - {fileID: 3260755959939566682}
   - {fileID: 3269192724375007572}
   - {fileID: 3260700741734564622}
-  - {fileID: 3260683092350477502}
+  - {fileID: 0}
   - {fileID: 3269235200374154132}
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3269115350298942962}
@@ -2744,6 +2652,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3010,6 +2919,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12488,6 +12398,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -17227,6 +17138,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -21997,6 +21909,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -26682,6 +26595,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
