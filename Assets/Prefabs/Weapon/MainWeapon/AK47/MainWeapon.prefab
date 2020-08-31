@@ -19925,6 +19925,7 @@ MonoBehaviour:
   currentAmmoCarried: 0
   FireRate: 600
   time: 0
+  recoil: {x: 0, y: 0.5}
   controller: {fileID: 0}
   isReady: 0
   bullet: {fileID: 4792577774353629631, guid: 822d2cf70b76a456e886117592f51f86, type: 3}
@@ -19934,6 +19935,7 @@ MonoBehaviour:
   isAiming: 0
   SpreadAngle: 60
   weaponHolder: {fileID: 0}
+  prefab: {fileID: 0}
 --- !u!114 &2748520902620672037
 MonoBehaviour:
   m_ObjectHideFlags: 0

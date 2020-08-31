@@ -46,13 +46,21 @@ public class WeaponManager : MonoBehaviour
 
     //所有武器的直接父级
     public Transform weaponHolder;
-
+    //背包
     public Inventory inventory;
+    //是否可以切枪
+    public bool canSwap;
+
+    //注册后坐力
+    public FPSMouseLook mouseLook;
 
     //做一些初始化的设置
     private void InitManager()
     {
+        canSwap = true;
+
         inventory = GetComponent<Inventory>();
+        mouseLook = GetComponentInChildren<FPSMouseLook>();
 
         //统计当前的武器信息
         CollectWeapon();
@@ -92,7 +100,7 @@ public class WeaponManager : MonoBehaviour
         //对副武器赋值
         if(secondaryWeaponTransform!=null)
         {
-            weaponTransform.Add("Secondary", secondaryWeaponTransform);
+            weaponTransform.Add("SecondaryWeapon", secondaryWeaponTransform);
             secondaryWeapon = secondaryWeaponTransform.GetComponentInChildren<FireArm>();
             transformDic.Add(secondaryWeapon, secondaryWeaponTransform);
             weaponDict.Add("SecondaryWeapon", secondaryWeapon);
@@ -116,6 +124,7 @@ public class WeaponManager : MonoBehaviour
         {
             specialWeapon = null;
         }
+
     }
 
     //将武器信息放入inventory，用于管理
@@ -136,7 +145,7 @@ public class WeaponManager : MonoBehaviour
         currentIndex = 0;
 
         //配置默认武器
-        if(currentWeapon!=null)
+        if(mainWeapon!=null)
         {
             currentWeaponTransform.gameObject.SetActive(false);
             currentWeaponTransform = mainWeaponTransform;
@@ -160,7 +169,14 @@ public class WeaponManager : MonoBehaviour
             currentWeaponTransform.gameObject.SetActive(true);
             currentIndex = 1;
         }
-       
+        if(weaponList.Count==0)
+        {
+            currentIndex = 0;
+        }
+        else
+        {
+            currentIndex = weaponList.IndexOf(currentWeaponTransform.name);
+        }
     }
 
     private void Update()
@@ -210,21 +226,39 @@ public class WeaponManager : MonoBehaviour
         //鼠标滚轮切换武器
         if (Input.GetAxisRaw(InputSettings.MouseScrollWheel)>0)
         {
-            currentIndex++;
-            currentIndex = currentIndex % weaponList.Count;
-            StartCoroutine(SwapWithMouse());
+            if(canSwap)
+            {
+                currentIndex++;
+                currentIndex = currentIndex % weaponList.Count;
+                if (weaponList.Count > 1)
+                {
+                    canSwap = false;
+                    StartCoroutine(SwapWithMouse());
+                }
+            }
+            
         }
         else if (Input.GetAxisRaw(InputSettings.MouseScrollWheel)<0)
         {
-            if (currentIndex <= 0)
+            if(canSwap)
             {
-                currentIndex = weaponList.Count-1;
+                if (currentIndex <= 0)
+                {
+                    currentIndex = weaponList.Count - 1;
+                }
+                else
+                {
+                    currentIndex--;
+                }
+                
+                if (weaponList.Count > 1)
+                {
+                    canSwap = false;
+                    StartCoroutine(SwapWithMouse());
+                }
+                
             }
-            else
-            {
-                currentIndex--;
-            }
-            StartCoroutine(SwapWithMouse());
+            
         }
 
         //丢弃武器
@@ -244,12 +278,13 @@ public class WeaponManager : MonoBehaviour
                     //切换的是另一把武器，且武器不为空
                     if(currentWeapon!= mainWeapon && weaponDict["MainWeapon"] != null)
                     {
+                        currentIndex = 0;
                         yield return SwapWeaponAnimation();
                         currentWeaponTransform.gameObject.SetActive(false);
                         currentWeaponTransform = mainWeaponTransform;
                         currentWeapon = mainWeapon;
                         currentWeaponTransform.gameObject.SetActive(true);
-                        currentIndex = 0;
+                        mouseLook.recoilRange = currentWeapon.recoil;
                     }
                     break;
                 }
@@ -258,25 +293,27 @@ public class WeaponManager : MonoBehaviour
                 {
                     if (currentWeapon != secondaryWeapon && weaponDict["SecondaryWeapon"]!=null)
                     {
+                        currentIndex = 1;
                         yield return SwapWeaponAnimation();
                         currentWeaponTransform.gameObject.SetActive(false);
                         currentWeaponTransform = secondaryWeaponTransform;
                         currentWeapon = secondaryWeapon;
                         currentWeaponTransform.gameObject.SetActive(true);
-                        currentIndex = 1;
+                        mouseLook.recoilRange = currentWeapon.recoil;
                     }
                     break;
                 }
             case 2:
                 {
-                    yield return SwapWeaponAnimation();
                     if (currentWeapon != specialWeapon && weaponDict["SpecialWeapon"] != null)
                     {
+                        currentIndex = 2;
+                        yield return SwapWeaponAnimation();
                         currentWeaponTransform.gameObject.SetActive(false);
                         currentWeaponTransform = specialWeaponTransform;
                         currentWeapon = specialWeapon;
                         currentWeaponTransform.gameObject.SetActive(true);
-                        currentIndex = 2;
+                        mouseLook.recoilRange = currentWeapon.recoil;
                     }
                     break;
                 }
@@ -286,13 +323,15 @@ public class WeaponManager : MonoBehaviour
     //滚轮切换武器
     public IEnumerator SwapWithMouse()
     {
+        yield return SwapWeaponAnimation();
         var weaponType = weaponList[currentIndex];
         var next_weapon = weaponDict[weaponType];
-        yield return SwapWeaponAnimation();
         currentWeaponTransform.gameObject.SetActive(false);
         currentWeaponTransform = transformDic[next_weapon];
         currentWeapon = next_weapon;
         currentWeaponTransform.gameObject.SetActive(true);
+        canSwap = true;
+        mouseLook.recoilRange = currentWeapon.recoil;
     }
 
     //添加新武器
@@ -300,6 +339,7 @@ public class WeaponManager : MonoBehaviour
     {
         //返回的是MainWeapon等的物体
         var newWeapon = GameObjectPool.instance.CreateObject(weaponName,gunType,gunPrefab);
+        Debug.Log(newWeapon.name);
 
         //先把该武器调整到weaponholder下进行管理，再根据需求进行显影
         if (weaponTransform.ContainsKey(gunType))
@@ -308,7 +348,12 @@ public class WeaponManager : MonoBehaviour
             GameObjectPool.instance.CollectGameObject(weaponNeedToCollectTransform.gameObject);
             weaponNeedToCollectTransform.SetParent(GameObjectPool.instance.transform);
         }
-        
+
+        if(weaponList.Contains(newWeapon.transform.name))
+        {
+            inventory.ChangeItem(newWeapon.transform.name, weaponDict[newWeapon.transform.name]);
+        }
+
         //把新的武器的位置设置好
         newWeapon.transform.SetParent(weaponHolder);
         newWeapon.GetComponentInChildren<FireArm>().weaponHolder = weaponHolder;
@@ -324,15 +369,32 @@ public class WeaponManager : MonoBehaviour
         CollectWeapon();
 
         //由于武器列表按照优先级排序，永远显示当前索引即可
-        var weaponTypeNeedToActive = weaponList[currentIndex];
-        //判断，如果本身一把武器都没有（初始状态）
-        if(currentWeaponTransform!=null)
+       var weaponTypeNeedToActive = weaponList[0];
+        //判断，如果本身拿着一把武器
+        if (currentWeaponTransform != null)
         {
-            currentWeaponTransform.gameObject.SetActive(false);
+            //如果马上要装备的武器和现在的武器索引不相同，就说明当前武器的优先级低于捡起的武器，所以要做显影
+            if (currentWeaponTransform != weaponTransform[weaponTypeNeedToActive])
+            {
+                currentWeaponTransform.gameObject.SetActive(false);
+                currentWeaponTransform = weaponTransform[weaponTypeNeedToActive];
+                currentWeaponTransform.gameObject.SetActive(true);
+                currentWeapon = weaponDict[weaponTypeNeedToActive];
+                mouseLook.recoilRange = currentWeapon.recoil;
+            }
+            else
+            {
+                newWeapon.transform.gameObject.SetActive(false);
+            }
         }
-        currentWeaponTransform = weaponTransform[weaponTypeNeedToActive];
-        currentWeaponTransform.gameObject.SetActive(true);
-        currentWeapon = weaponDict[weaponTypeNeedToActive];
+        else
+        {
+            currentWeaponTransform = weaponTransform[weaponTypeNeedToActive];
+            currentWeaponTransform.gameObject.SetActive(true);
+            currentWeapon = weaponDict[weaponTypeNeedToActive];
+            mouseLook.recoilRange = currentWeapon.recoil;
+        }
+
     }
 
     //判断是否可以丢弃武器，如果可以让对象池回收以节省性能，并设置下一把活动武器，如果不行则不执行
@@ -366,6 +428,24 @@ public class WeaponManager : MonoBehaviour
         currentWeaponTransform = transformDic[currentWeapon];
         currentWeaponTransform.gameObject.SetActive(true);
 
+    }
+
+    //移除指定武器
+    public void DropWeapon(Transform weaponTransform)
+    {
+        //if(weaponList.Count==1)
+        //{
+        //    return;
+        //}
+
+        //移除武器
+        weaponTransform.SetParent(GameObjectPool.instance.transform);
+        weaponTransform.gameObject.SetActive(false);
+        GameObjectPool.instance.CollectGameObject(weaponTransform.gameObject);
+
+        var tmp = weaponDict[weaponTransform.name];
+
+        inventory.DropItem(weaponTransform.name, tmp);
     }
 
     private IEnumerator SwapWeaponAnimation()

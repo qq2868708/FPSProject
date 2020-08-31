@@ -8,11 +8,15 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     public string weapn_Name;
 
     //枪口特效
-    private Transform muzzlePoint;
+    [SerializeField]
+    protected Transform muzzlePoint;
+    [SerializeField]
     protected ParticleSystem muzzleParticle;
 
     //抛壳特效
-    private Transform casingPoint;
+    [SerializeField]
+    protected Transform casingPoint;
+    [SerializeField]
     protected ParticleSystem casingParticle;
 
     //弹夹配置
@@ -22,8 +26,13 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     public int currentAmmoInMag;
     public int currentAmmoCarried;
 
+    //攻击速率
     public float FireRate;
+    //控制射击间隔
     public float time;
+
+    //射击的后坐力
+    public Vector2 recoil;
 
     //使用统一的动画机接口
     public FPSAnimatorController controller;

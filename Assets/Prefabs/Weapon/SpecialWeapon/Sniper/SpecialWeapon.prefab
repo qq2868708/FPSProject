@@ -9530,7 +9530,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5625924598659006836}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19581,6 +19581,7 @@ MonoBehaviour:
   currentAmmoCarried: 0
   FireRate: 60
   time: 0
+  recoil: {x: 0, y: 3}
   controller: {fileID: 0}
   isReady: 0
   bullet: {fileID: 4792577774353629631, guid: 822d2cf70b76a456e886117592f51f86, type: 3}
@@ -19590,6 +19591,7 @@ MonoBehaviour:
   isAiming: 0
   SpreadAngle: 5
   weaponHolder: {fileID: 0}
+  prefab: {fileID: 0}
   clip: {fileID: 8300000, guid: 657f66f361dd0cc438866c411bf22a6e, type: 3}
 --- !u!1 &9125421661650344070
 GameObject:

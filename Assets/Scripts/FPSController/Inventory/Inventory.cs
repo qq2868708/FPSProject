@@ -16,6 +16,9 @@ public class Inventory : MonoBehaviour
     public Dictionary<string, GunItem> inventoryDic = new Dictionary<string, GunItem>();
     public Dictionary<string, GameObject> prefabsDic = new Dictionary<string, GameObject>();
 
+    public GameObject tmp_obj;
+    public GunItem tmp_item;
+
     //场景中用于同一管理所有中立物品的父对象
     public Transform ItemCollector;
     //扔东西的组件
@@ -30,7 +33,6 @@ public class Inventory : MonoBehaviour
     private void Update()
     {
 
-        Debug.DrawLine(mainCamera.transform.position, mainCamera.transform.position + mainCamera.transform.forward*maxDistance, Color.green, 0.2f);
         if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out RaycastHit hit, maxDistance, layer))
         {
             pickableObject = hit.collider.gameObject.GetComponent<Item>();
@@ -50,6 +52,8 @@ public class Inventory : MonoBehaviour
                     var tmpGun = pickableObject as GunItem;
                     if(inventoryDic.ContainsKey(tmpGun.gunType))
                     {
+                        tmp_obj = prefabsDic[tmpGun.gunType];
+                        tmp_item = inventoryDic[tmpGun.gunType];
                         inventoryDic[tmpGun.gunType] = tmpGun;
                         prefabsDic[tmpGun.gunType] = tmpGun.gameObject;
                         GameObjectPool.instance.CollectGameObject(prefabsDic[tmpGun.gunType]);
@@ -78,18 +82,31 @@ public class Inventory : MonoBehaviour
     {
         //实例化武器对象，并扔出去
         var tmp = prefabsDic[weaponType];
-        Debug.Log(tmp.name);
         tmp = GameObjectPool.instance.CreateObject(tmp.name,tmp);
         tmp.transform.SetParent(ItemCollector);
         tmp.transform.position = throwPoint.position;
         tmp.transform.rotation = throwPoint.rotation;
-        tmp.GetComponent<Rigidbody>().AddForce(throwPoint.forward * 30);
+        tmp.GetComponent<Rigidbody>().AddForce(throwPoint.forward * 100);
 
         tmp.GetComponent<GunItem>().currentInMag = fireArm.currentAmmoInMag;
         tmp.GetComponent<GunItem>().currentMagCarried = fireArm.currentAmmoCarried;
 
         inventoryDic.Remove(weaponType);
         prefabsDic.Remove(weaponType);
+
+    }
+
+    public void ChangeItem(string weaponType, FireArm fireArm)
+    {
+        //实例化武器对象，并扔出去
+        var tmp = GameObjectPool.instance.CreateObject(tmp_obj.name, tmp_obj);
+        tmp.transform.SetParent(ItemCollector);
+        tmp.transform.position = throwPoint.position;
+        tmp.transform.rotation = throwPoint.rotation;
+        tmp.GetComponent<Rigidbody>().AddForce(throwPoint.forward * 100);
+
+        tmp.GetComponent<GunItem>().currentInMag = fireArm.currentAmmoInMag;
+        tmp.GetComponent<GunItem>().currentMagCarried = fireArm.currentAmmoCarried;
 
     }
 

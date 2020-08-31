@@ -53,9 +53,11 @@ public class GameObjectPool : MonoBehaviour
             }
             else
             {
-                dict[gunType].Add(obj);
                 var tmp_gun = Instantiate(obj);
-                return obj;
+                tmp_gun.name = tmp_gun.name.Remove(tmp_gun.name.Length - 7);
+                dict[gunType].Add(tmp_gun);
+
+                return tmp_gun;
             }
             
         }

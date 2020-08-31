@@ -1116,12 +1116,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapn_Name: HandGun
+  muzzlePoint: {fileID: 0}
+  muzzleParticle: {fileID: 0}
+  casingPoint: {fileID: 0}
+  casingParticle: {fileID: 0}
   ammoInMag: 6
   MaxAmmorCarried: 60
   currentAmmoInMag: 0
   currentAmmoCarried: 0
   FireRate: 200
   time: 0
+  recoil: {x: 0, y: 1}
   controller: {fileID: 0}
   isReady: 0
   bullet: {fileID: 4792577774353629631, guid: 822d2cf70b76a456e886117592f51f86, type: 3}
@@ -1131,6 +1136,7 @@ MonoBehaviour:
   isAiming: 0
   SpreadAngle: 40
   weaponHolder: {fileID: 0}
+  prefab: {fileID: 8025444526789826456, guid: 84527d31a0017429b921fe642786b4db, type: 3}
 --- !u!114 &3263440868549797020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2769,17 +2775,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8663946665277951391}
-  m_LocalRotation: {x: -0.000000014901163, y: -0.70710677, z: -0.000000044703487,
-    w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2.5479956, z: -30.743008}
-  m_LocalScale: {x: 0.20000014, y: 0.20000003, z: 0.20000009}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.914, z: 0.288}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 8663946666698060246}
   - {fileID: 8663946665908237773}
   - {fileID: 8663946666324185869}
   m_Father: {fileID: 3261152955339935730}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8663946665277951386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7651,9 +7656,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8663946665568337366}
-  m_LocalRotation: {x: 0.0000000745058, y: 0.70710677, z: 0.000000014901159, w: 0.7071068}
-  m_LocalPosition: {x: 0.022399865, y: 2.579484, z: -31.242006}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: -0.908, z: 0.169}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3261152955339935730}
   m_RootOrder: 3
