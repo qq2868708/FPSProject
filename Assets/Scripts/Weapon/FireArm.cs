@@ -135,6 +135,7 @@ public abstract class FireArm : MonoBehaviour,IWeapon
         tmp_obj.transform.position = muzzlePoint.position;
         tmp_obj.transform.rotation = muzzlePoint.rotation;
         tmp_obj.transform.eulerAngles += CaculateSpreadBullet();
+        tmp_obj.SetActive(true);
         tmp_obj.GetComponent<Rigidbody>().velocity = tmp_obj.transform.forward * 100;
     }
 

@@ -41,8 +41,10 @@ public class Bullet : MonoBehaviour
             {
                 //产生特效并在一定时间后让对象池回收
                 var tmp = instance.CreateObject("BulletEffect", bulletEffect);
+                Debug.Log(hit.point);
                 tmp.transform.rotation = Quaternion.LookRotation(hit.normal);
                 tmp.transform.position = hit.point;
+                tmp.SetActive(true);
                 instance.CollectGameObject(tmp, 2);
 
                 //产生声音
@@ -55,6 +57,7 @@ public class Bullet : MonoBehaviour
                 instance.CollectGameObject(this.gameObject);
             }
         }
+        old_Pos = transform.position;
         //如果超过射程则销毁
         if (Vector3.Distance(this.transform.position, origin_Pos) > 200)
         {

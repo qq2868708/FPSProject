@@ -73,8 +73,7 @@ public class GameObjectPool : MonoBehaviour
             var tmp_obj = CheckUsage(tmp_list);
             if (tmp_obj)
             {
-                //找到了空闲对象，则显示
-                tmp_obj.SetActive(true);
+                //找到了空闲对象，则返回
                 return tmp_obj;
             }
             else
@@ -84,7 +83,6 @@ public class GameObjectPool : MonoBehaviour
                 tmp_obj.name = tmp_obj.name.Remove(tmp_obj.name.Length - 7);
                 tmp_list.Add(tmp_obj);
                 tmp_obj.transform.parent = this.transform;
-                tmp_obj.SetActive(true);
                 return tmp_obj;
             }
         }

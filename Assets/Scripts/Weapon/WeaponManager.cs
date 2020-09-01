@@ -92,6 +92,7 @@ public class WeaponManager : MonoBehaviour
             transformDic.Add(mainWeapon, mainWeaponTransform);
             weaponDict.Add("MainWeapon", mainWeapon);
             weaponList.Add("MainWeapon");
+            mainWeapon.weaponHolder = this.weaponHolder;
         }
         else
         {
@@ -105,7 +106,7 @@ public class WeaponManager : MonoBehaviour
             transformDic.Add(secondaryWeapon, secondaryWeaponTransform);
             weaponDict.Add("SecondaryWeapon", secondaryWeapon);
             weaponList.Add("SecondaryWeapon");
-
+            secondaryWeapon.weaponHolder = this.weaponHolder;
         }
         else
         {
@@ -119,6 +120,7 @@ public class WeaponManager : MonoBehaviour
             transformDic.Add(specialWeapon, specialWeaponTransform);
             weaponDict.Add("SpecialWeapon", specialWeapon);
             weaponList.Add("SpecialWeapon");
+            specialWeapon.weaponHolder = this.weaponHolder;
         }
         else
         {
@@ -136,7 +138,7 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         InitManager();
 
@@ -176,6 +178,7 @@ public class WeaponManager : MonoBehaviour
         else
         {
             currentIndex = weaponList.IndexOf(currentWeaponTransform.name);
+            mouseLook.recoilRange = currentWeapon.recoil;
         }
     }
 
