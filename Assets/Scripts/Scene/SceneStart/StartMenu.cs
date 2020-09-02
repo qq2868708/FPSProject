@@ -30,6 +30,9 @@ public class StartMenu : MonoBehaviour
     //储存了打开顺序，用于关闭界面
     public List<string> sceneList = new List<string>();
 
+    public GameObject dataButton;
+    public Transform dataList;
+
     private void Start()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
@@ -41,7 +44,7 @@ public class StartMenu : MonoBehaviour
            yield return CopyDataBase();
         }
 #endif
-
+        HideSecondPanel();
         PlayerPrefs.SetString("NextScene", "Assets/Scenes/Scene01/Scene01.unity");
     }
 
@@ -49,8 +52,8 @@ public class StartMenu : MonoBehaviour
     //开始游戏
     public void GameStartClick()
     {
-        bool b= SearchPlayerData();
-        if(b)
+        int b= SearchPlayerData();
+        if(b>=1)
         {
             CallSecondPanel("NewGameMenu");
         }
@@ -109,16 +112,46 @@ public class StartMenu : MonoBehaviour
     //继续游戏
     public void GameContinueClick()
     {
-        bool b = SearchPlayerData();
-        if (b)
+        int b = SearchPlayerData();
+        if (b==1)
         {
+            PlayerPrefs.SetString("Player", playerName);
             SceneManager.LoadScene("Assets/Scenes/SceneLoading/SceneLoading.unity");
+        }
+        else if(b==0)
+        {
+            CallSecondPanel("ContinueMenu");
         }
         else
         {
-            CallSecondPanel("Cou");
+            //根据记录的数目显示出来
+            CallSecondPanel("ChooseData");
+            CreateDataBase();
+            SqliteDataReader reader = db.ReadFullTable("PlayerData");
+            while(reader.Read())
+            {
+                var tmp = Instantiate(dataButton);
+                tmp.name = tmp.name.Remove(tmp.name.Length - 7);
+                tmp.transform.SetParent(dataList);
+                tmp.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+                tmp.GetComponent<Button>().onClick.AddListener( ContinueGame);
+                string tmp_Name = reader.GetString(reader.GetOrdinal("PlayerName"));
+                tmp.GetComponentInChildren<Text>().text = tmp_Name;
+            }
+            db.CloseSqlConnection();
         }
-        
+    }
+
+    //点击存档开始游戏
+    public void ContinueGame()
+    {
+        //获取按钮的信息
+        var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        //获取按钮上的文本信息，并赋值给当前角色
+        playerName = button.GetComponentInChildren<Text>().text;
+        PlayerPrefs.SetString("Player", playerName);
+        //加载场景
+        SceneManager.LoadScene("Assets/Scenes/SceneLoading/SceneLoading.unity");
     }
     #endregion
 
@@ -144,30 +177,26 @@ public class StartMenu : MonoBehaviour
     }
 
     //查找有没有用户数据
-    private bool SearchPlayerData()
+    private int SearchPlayerData()
     {
-        bool b;
+        int i = 0;
         CreateDataBase();
         SqliteDataReader reader= db.ExistTables("PlayerData");
         if (reader.Read())
         {
             SqliteDataReader tmp_reader = db.DataCount("PlayerData");
-            if (tmp_reader.Read())
+            while(tmp_reader.Read())
             {
-                b= true;
-            }
-            else
-            {
-                b= false;
+                i++;
             }
         }
         else
         {
             db.CreateTable("PlayerData", new string[] { "PlayerID", "PlayerName" }, new string[] { "int", "text" });
-            b= false;
+            i = 0;
         }
         db.CloseSqlConnection();
-        return b;
+        return i;
     }
 
     //查找记录
@@ -180,6 +209,7 @@ public class StartMenu : MonoBehaviour
         db.CloseSqlConnection();
         return b;
     }
+
     #endregion
 
     #region 界面操作的通用方法
