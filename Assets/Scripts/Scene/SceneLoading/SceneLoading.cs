@@ -12,7 +12,15 @@ public class SceneLoading : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(PlayerPrefs.GetString("NextScene"));
+        //Debug.Log(PlayerPrefs.GetString("NextScene"));
+        var nextScrene = PlayerPrefs.GetString("NextScene").Split('/');
+        var sceneIndex = nextScrene[nextScrene.Length - 1].Remove(0, 5);
+        sceneIndex = sceneIndex.Remove(sceneIndex.Length - 6);
+        var nextSceneID = int.Parse(sceneIndex);
+        if (nextSceneID > PlayerPrefs.GetInt("SceneCount"))
+        {
+            PlayerPrefs.SetString("NextScene", "Assets / Scenes / SceneEnd / SceneEnd.unity");
+        }
         loading = SceneManager.LoadSceneAsync(PlayerPrefs.GetString("NextScene"));
     }
 

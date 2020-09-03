@@ -520,6 +520,7 @@ MonoBehaviour:
   currentStateID: 0
   defaultStateID: 1
   attackCollider: {fileID: 0}
+  instance: {fileID: 0}
   aiConfigFile: AI_01.txt
   animParams:
     Idle: idle
@@ -556,7 +557,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

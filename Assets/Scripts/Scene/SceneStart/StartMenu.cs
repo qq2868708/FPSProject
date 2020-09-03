@@ -56,6 +56,10 @@ public class StartMenu : MonoBehaviour
         PlayerPrefs.SetString("NextScene", "Assets/Scenes/Scene01/Scene01.unity");
         //在后续场景中使用dbmanager管理数据库
         DbManager.appDBPath = appDBPath;
+        //统计游戏场景的数目
+        var count = SceneManager.sceneCountInBuildSettings-3;
+        //Debug.Log(count);
+        PlayerPrefs.SetInt("SceneCount", count);
     }
 
     #region 开始游戏按钮
@@ -85,11 +89,14 @@ public class StartMenu : MonoBehaviour
     //如果输入的名字可用，则加载新场景
     public void StartNewGame()
     {
-        if (!FindData(playerName))
+        if(playerName!="")
         {
-            InsertData(playerName);
-            PlayerPrefs.SetString("Player", playerName);
-            SceneManager.LoadScene("Assets/Scenes/SceneLoading/SceneLoading.unity");
+            if (!FindData(playerName))
+            {
+                InsertData(playerName);
+                PlayerPrefs.SetString("Player", playerName);
+                SceneManager.LoadScene("Assets/Scenes/SceneLoading/SceneLoading.unity");
+            }
         }
     }
 
@@ -103,6 +110,12 @@ public class StartMenu : MonoBehaviour
     //检查名字的使用情况，并显示提示信息
     public void CheckName(string a)
     {
+        if (a.Contains(" "))
+        {
+            warningText.color = Color.red;
+            warningText.text = "用户名不能包含空格";
+            return;
+        }
         bool b = FindData(a);
         if (b)
         {
@@ -159,6 +172,10 @@ public class StartMenu : MonoBehaviour
                 tmp.GetComponent<Toggle>().onValueChanged.AddListener(ChooseData);
                 string tmp_Name = reader.GetString(reader.GetOrdinal("PlayerName"));
                 tmp.GetComponentInChildren<Text>().text = tmp_Name;
+                if(reader.GetInt32(reader.GetOrdinal("Stage"))>PlayerPrefs.GetInt("SceneCount"))
+                {
+                    tmp.GetComponentInChildren<Text>().text += " （通关）";
+                }
                 tmp_size += tmp.GetComponent<RectTransform>().sizeDelta.y;
                 if (toggleGroup.GetComponent<RectTransform>().sizeDelta.y < tmp_size)
                 {
@@ -174,11 +191,19 @@ public class StartMenu : MonoBehaviour
     public void ContinueGame()
     {
         playerName = activeToggle.GetComponentInChildren<Text>().text;
+        playerName = playerName.Split(' ')[0];
         PlayerPrefs.SetString("Player", playerName);
+        Debug.Log(playerName);
         CreateDataBase();
         SqliteDataReader reader = db.Select("PlayerData", "PlayerName", "'" + playerName + "'");
         reader.Read();
         int sceneID = reader.GetInt32(reader.GetOrdinal("Stage"));
+        if (sceneID > PlayerPrefs.GetInt("SceneCount"))
+        {
+            var tmp = TransformHelper.FindChild(this.transform, "MessageBox");
+            tmp.gameObject.SetActive(true);
+            return;
+        }
         db.CloseSqlConnection();
         var nextScene = PlayerPrefs.GetString("appSceneBase") + "0" + (sceneID) + "/Scene0" + (sceneID) + ".unity";
         PlayerPrefs.SetString("NextScene", nextScene);
@@ -190,6 +215,7 @@ public class StartMenu : MonoBehaviour
     public void Delete()
     {
         playerName = activeToggle.GetComponentInChildren<Text>().text;
+        playerName = playerName.Split(' ')[0];
         DeleteData(playerName);
     }
 
@@ -207,13 +233,19 @@ public class StartMenu : MonoBehaviour
         }
     }
 
-    //返回上级菜单
+    //更新菜单
     public void CleanToggle()
     {
         for(int i=0;i<toggleGroup.transform.childCount;i++)
         {
             Destroy(toggleGroup.transform.GetChild(i).gameObject);
         }
+    }
+
+    public void HideMessageBox()
+    {
+        var tmp = TransformHelper.FindChild(this.transform, "MessageBox");
+        tmp.gameObject.SetActive(false);
     }
     #endregion
 
@@ -274,7 +306,6 @@ public class StartMenu : MonoBehaviour
     //删除记录
     public void DeleteData(string Name)
     {
-        Debug.Log(Name);
         CreateDataBase();
         db.Delete("PlayerData", new string[] { "PlayerName" }, new string[] { "'"+Name+"'" });
         db.CloseSqlConnection();
