@@ -16,7 +16,6 @@ public class Door : MonoBehaviour,IInteractable
         }
         else
         {
-            Debug.Log(transform.localRotation.eulerAngles);
             StartCoroutine(Move(100));
         }
         
@@ -24,17 +23,7 @@ public class Door : MonoBehaviour,IInteractable
 
     private IEnumerator Move(int target)
     {
-        //float sum = 0;
-        //while(target-sum>1)
-        //{
-        //    yield return null;
-        //    var tmp = (target-sum) * 0.3f;
-        //    sum += tmp;
-        //    Debug.Log(sum);
-        //}
-
         float tmp_angle = joint.localEulerAngles.y;
-        Debug.Log(tmp_angle);
         while(Mathf.Abs( target-tmp_angle)>1)
         {
             yield return null;

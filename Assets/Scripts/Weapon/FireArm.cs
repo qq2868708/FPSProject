@@ -31,6 +31,9 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     //控制射击间隔
     public float time;
 
+    //攻击力
+    public int damage;
+
     //射击的后坐力
     public Vector2 recoil;
 
@@ -135,6 +138,7 @@ public abstract class FireArm : MonoBehaviour,IWeapon
         tmp_obj.transform.position = muzzlePoint.position;
         tmp_obj.transform.rotation = muzzlePoint.rotation;
         tmp_obj.transform.eulerAngles += CaculateSpreadBullet();
+        tmp_obj.GetComponent<Bullet>().damage = this.damage;
         tmp_obj.SetActive(true);
         tmp_obj.GetComponent<Rigidbody>().velocity = tmp_obj.transform.forward * 100;
     }

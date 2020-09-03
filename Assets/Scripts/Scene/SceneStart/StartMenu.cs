@@ -30,8 +30,14 @@ public class StartMenu : MonoBehaviour
     //储存了打开顺序，用于关闭界面
     public List<string> sceneList = new List<string>();
 
+    public ToggleGroup toggleGroup;
+
+    //用于实例化的Toggle预制件
     public GameObject dataButton;
     public Transform dataList;
+
+    [SerializeField]
+    private GameObject activeToggle;
 
     private void Start()
     {
@@ -45,7 +51,11 @@ public class StartMenu : MonoBehaviour
         }
 #endif
         HideSecondPanel();
+        PlayerPrefs.SetString("appDBDathPath", appDBPath);
+        PlayerPrefs.SetString("appSceneBase", "Assets/Scenes/Scene");
         PlayerPrefs.SetString("NextScene", "Assets/Scenes/Scene01/Scene01.unity");
+        //在后续场景中使用dbmanager管理数据库
+        DbManager.appDBPath = appDBPath;
     }
 
     #region 开始游戏按钮
@@ -75,8 +85,10 @@ public class StartMenu : MonoBehaviour
     //如果输入的名字可用，则加载新场景
     public void StartNewGame()
     {
-        if (FindData(playerName))
+        if (!FindData(playerName))
         {
+            InsertData(playerName);
+            PlayerPrefs.SetString("Player", playerName);
             SceneManager.LoadScene("Assets/Scenes/SceneLoading/SceneLoading.unity");
         }
     }
@@ -115,7 +127,15 @@ public class StartMenu : MonoBehaviour
         int b = SearchPlayerData();
         if (b==1)
         {
+            CreateDataBase();
+            SqliteDataReader reader = db.ReadFullTable("PlayerData");
+            reader.Read();
+            playerName = reader.GetString(reader.GetOrdinal("PlayerName"));
             PlayerPrefs.SetString("Player", playerName);
+            int sceneID = reader.GetInt32(reader.GetOrdinal("Stage"));
+            var nextScene = PlayerPrefs.GetString("appSceneBase") + "0" + (sceneID) + "/Scene0" + (sceneID) + ".unity";
+            PlayerPrefs.SetString("NextScene", nextScene);
+            db.CloseSqlConnection();
             SceneManager.LoadScene("Assets/Scenes/SceneLoading/SceneLoading.unity");
         }
         else if(b==0)
@@ -128,30 +148,72 @@ public class StartMenu : MonoBehaviour
             CallSecondPanel("ChooseData");
             CreateDataBase();
             SqliteDataReader reader = db.ReadFullTable("PlayerData");
+            float tmp_size = 0;
             while(reader.Read())
             {
                 var tmp = Instantiate(dataButton);
                 tmp.name = tmp.name.Remove(tmp.name.Length - 7);
                 tmp.transform.SetParent(dataList);
                 tmp.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-                tmp.GetComponent<Button>().onClick.AddListener( ContinueGame);
+                tmp.GetComponent<Toggle>().group = toggleGroup;
+                tmp.GetComponent<Toggle>().onValueChanged.AddListener(ChooseData);
                 string tmp_Name = reader.GetString(reader.GetOrdinal("PlayerName"));
                 tmp.GetComponentInChildren<Text>().text = tmp_Name;
+                tmp_size += tmp.GetComponent<RectTransform>().sizeDelta.y;
+                if (toggleGroup.GetComponent<RectTransform>().sizeDelta.y < tmp_size)
+                {
+                    toggleGroup.GetComponent<RectTransform>().sizeDelta = new Vector2(toggleGroup.GetComponent<RectTransform>().sizeDelta.x, tmp_size);
+                }
             }
             db.CloseSqlConnection();
+            TransformHelper.FindChild(UI_02.transform, "DataScrollbar").GetComponent<Scrollbar>().value = 1;
         }
     }
 
     //点击存档开始游戏
     public void ContinueGame()
     {
-        //获取按钮的信息
-        var button = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        //获取按钮上的文本信息，并赋值给当前角色
-        playerName = button.GetComponentInChildren<Text>().text;
+        playerName = activeToggle.GetComponentInChildren<Text>().text;
         PlayerPrefs.SetString("Player", playerName);
+        CreateDataBase();
+        SqliteDataReader reader = db.Select("PlayerData", "PlayerName", "'" + playerName + "'");
+        reader.Read();
+        int sceneID = reader.GetInt32(reader.GetOrdinal("Stage"));
+        db.CloseSqlConnection();
+        var nextScene = PlayerPrefs.GetString("appSceneBase") + "0" + (sceneID) + "/Scene0" + (sceneID) + ".unity";
+        PlayerPrefs.SetString("NextScene", nextScene);
         //加载场景
         SceneManager.LoadScene("Assets/Scenes/SceneLoading/SceneLoading.unity");
+    }
+
+    //删除存档
+    public void Delete()
+    {
+        playerName = activeToggle.GetComponentInChildren<Text>().text;
+        DeleteData(playerName);
+    }
+
+    //当选择了存档
+    public void ChooseData(bool value)
+    {
+        var toggle= UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        if(toggle.GetComponentInChildren<Toggle>()==null)
+        {
+            return;
+        }
+        if(toggle.GetComponent<Toggle>().isOn)
+        {
+            activeToggle = toggle;
+        }
+    }
+
+    //返回上级菜单
+    public void CleanToggle()
+    {
+        for(int i=0;i<toggleGroup.transform.childCount;i++)
+        {
+            Destroy(toggleGroup.transform.GetChild(i).gameObject);
+        }
     }
     #endregion
 
@@ -160,7 +222,6 @@ public class StartMenu : MonoBehaviour
     //创建数据库
     private void CreateDataBase()
     {
-
         db = new DbAccess("URI=file:" + appDBPath);
     }
 
@@ -210,6 +271,43 @@ public class StartMenu : MonoBehaviour
         return b;
     }
 
+    //删除记录
+    public void DeleteData(string Name)
+    {
+        Debug.Log(Name);
+        CreateDataBase();
+        db.Delete("PlayerData", new string[] { "PlayerName" }, new string[] { "'"+Name+"'" });
+        db.CloseSqlConnection();
+        RefreshData();
+    }
+
+    public void RefreshData()
+    {
+        CleanToggle();
+        CreateDataBase();
+        SqliteDataReader reader = db.ReadFullTable("PlayerData");
+        while(reader.Read())
+        {
+            var tmp = Instantiate(dataButton);
+            tmp.name = tmp.name.Remove(tmp.name.Length - 7);
+            tmp.transform.SetParent(dataList);
+            tmp.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            tmp.GetComponent<Toggle>().group = toggleGroup;
+            tmp.GetComponent<Toggle>().onValueChanged.AddListener(ChooseData);
+            string tmp_Name = reader.GetString(reader.GetOrdinal("PlayerName"));
+            tmp.GetComponentInChildren<Text>().text = tmp_Name;
+        }
+        db.CloseSqlConnection();
+    }
+
+    public void InsertData(string Name)
+    {
+        CreateDataBase();
+        string tmp = "'" + Name + "'";
+        Debug.Log(tmp);
+        db.InsertInto("PlayerData", new string[] {"NULL",tmp,"1" });
+        db.CloseSqlConnection();
+    }
     #endregion
 
     #region 界面操作的通用方法
@@ -246,6 +344,8 @@ public class StartMenu : MonoBehaviour
         {
             UI_02.SetActive(false);
         }
+
+        CleanToggle();
     }
 
     #endregion

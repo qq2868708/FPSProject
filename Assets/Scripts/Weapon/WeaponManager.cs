@@ -54,6 +54,9 @@ public class WeaponManager : MonoBehaviour
     //注册后坐力
     public FPSMouseLook mouseLook;
 
+    //场景管理器，控制游戏流程
+    public LevelManager instance;
+
     //做一些初始化的设置
     private void InitManager()
     {
@@ -182,92 +185,100 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        instance = LevelManager.instance;
+    }
+
     private void Update()
     {
-        //没有武器，这是一个错误
-        if (currentWeapon == null)
+        if(instance.gameStart)
         {
-            return;
-        }
-
-        //射击
-        if (Input.GetKey(InputSettings.Fire))
-        {
-            currentWeapon.DoAttack();
-        }
-
-        //装填
-        if (Input.GetKeyDown(InputSettings.Reload))
-        {
-            currentWeapon.Reload();
-        }
-
-        //瞄准
-        if (Input.GetKeyDown(InputSettings.Aim))
-        {
-            currentWeapon.Aim(true);
-        }
-        else if (Input.GetKeyUp(InputSettings.Aim))
-        {
-            currentWeapon.Aim(false);
-        }
-
-        //切换武器
-        if (Input.GetKeyDown(InputSettings.MainWeapon))
-        {
-            StartCoroutine( SwapWeapon(0));
-        }
-        else if (Input.GetKeyDown(InputSettings.SecondaryWeapon))
-        {
-            StartCoroutine( SwapWeapon(1));
-        }
-        else if (Input.GetKeyDown(InputSettings.SpecialWeapon))
-        {
-            StartCoroutine(SwapWeapon(2));
-        }
-
-        //鼠标滚轮切换武器
-        if (Input.GetAxisRaw(InputSettings.MouseScrollWheel)>0)
-        {
-            if(canSwap)
+            //没有武器，这是一个错误
+            if (currentWeapon == null)
             {
-                currentIndex++;
-                currentIndex = currentIndex % weaponList.Count;
-                if (weaponList.Count > 1)
-                {
-                    canSwap = false;
-                    StartCoroutine(SwapWithMouse());
-                }
+                return;
             }
-            
-        }
-        else if (Input.GetAxisRaw(InputSettings.MouseScrollWheel)<0)
-        {
-            if(canSwap)
-            {
-                if (currentIndex <= 0)
-                {
-                    currentIndex = weaponList.Count - 1;
-                }
-                else
-                {
-                    currentIndex--;
-                }
-                
-                if (weaponList.Count > 1)
-                {
-                    canSwap = false;
-                    StartCoroutine(SwapWithMouse());
-                }
-                
-            }
-            
-        }
 
-        //丢弃武器
-        if(Input.GetKeyDown(InputSettings.DropWeapon))
-        {
-            DropWeapon();
+            //射击
+            if (Input.GetKey(InputSettings.Fire))
+            {
+                currentWeapon.DoAttack();
+            }
+
+            //装填
+            if (Input.GetKeyDown(InputSettings.Reload))
+            {
+                currentWeapon.Reload();
+            }
+
+            //瞄准
+            if (Input.GetKeyDown(InputSettings.Aim))
+            {
+                currentWeapon.Aim(true);
+            }
+            else if (Input.GetKeyUp(InputSettings.Aim))
+            {
+                currentWeapon.Aim(false);
+            }
+
+            //切换武器
+            if (Input.GetKeyDown(InputSettings.MainWeapon))
+            {
+                StartCoroutine(SwapWeapon(0));
+            }
+            else if (Input.GetKeyDown(InputSettings.SecondaryWeapon))
+            {
+                StartCoroutine(SwapWeapon(1));
+            }
+            else if (Input.GetKeyDown(InputSettings.SpecialWeapon))
+            {
+                StartCoroutine(SwapWeapon(2));
+            }
+
+            //鼠标滚轮切换武器
+            if (Input.GetAxisRaw(InputSettings.MouseScrollWheel) > 0)
+            {
+                if (canSwap)
+                {
+                    currentIndex++;
+                    currentIndex = currentIndex % weaponList.Count;
+                    if (weaponList.Count > 1)
+                    {
+                        canSwap = false;
+                        StartCoroutine(SwapWithMouse());
+                    }
+                }
+
+            }
+            else if (Input.GetAxisRaw(InputSettings.MouseScrollWheel) < 0)
+            {
+                if (canSwap)
+                {
+                    if (currentIndex <= 0)
+                    {
+                        currentIndex = weaponList.Count - 1;
+                    }
+                    else
+                    {
+                        currentIndex--;
+                    }
+
+                    if (weaponList.Count > 1)
+                    {
+                        canSwap = false;
+                        StartCoroutine(SwapWithMouse());
+                    }
+
+                }
+
+            }
+
+            //丢弃武器
+            if (Input.GetKeyDown(InputSettings.DropWeapon))
+            {
+                DropWeapon();
+            }
         }
     }
 

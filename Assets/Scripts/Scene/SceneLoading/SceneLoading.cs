@@ -12,6 +12,7 @@ public class SceneLoading : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(PlayerPrefs.GetString("NextScene"));
         loading = SceneManager.LoadSceneAsync(PlayerPrefs.GetString("NextScene"));
     }
 

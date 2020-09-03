@@ -9,6 +9,7 @@ TagManager:
   - grass
   - metal
   - FX
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Item
   - Terrian
   - Interact
-  - 
+  - Monster
   - 
   - 
   - 

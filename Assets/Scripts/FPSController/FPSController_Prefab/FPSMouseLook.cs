@@ -25,35 +25,45 @@ public class FPSMouseLook : MonoBehaviour
     private float currentRecoilTime;
     private Vector2 currentRecoil;
     public float recoilFadeOutTime=0.3f;
-
+    
     public CameraShakeController cameraShakeController;
+    //用于场景管理器初始化位置
+    public Quaternion playerQuaternion;
+
+    //场景管理器，用于处理场景的输入
+    public LevelManager instance;
 
     private void Start()
     {
         Mousecamera = this.gameObject.transform;
         cameraShakeController = GetComponentInChildren<CameraShakeController>();
+        this.transform.rotation = playerQuaternion;
+        instance = LevelManager.instance;
     }
 
     private void Update()
     {
-        inputTempX = Input.GetAxis(InputSettings.MouseX) * lookSpeed*Time.deltaTime;
-        inputTempY = Input.GetAxis(InputSettings.MouseY) * lookSpeed*Time.deltaTime;
+        if(instance.gameStart)
+        {
+            inputTempX = Input.GetAxis(InputSettings.MouseX) * lookSpeed * Time.deltaTime;
+            inputTempY = Input.GetAxis(InputSettings.MouseY) * lookSpeed * Time.deltaTime;
 
-        //下面会让两个旋转被混合
-        //transform.rotation *= Quaternion.Euler(inputTempX, inputTempY, 0);
+            //下面会让两个旋转被混合
+            //transform.rotation *= Quaternion.Euler(inputTempX, inputTempY, 0);
 
-        cameraRotation.x += inputTempX;
-        cameraRotation.y -= inputTempY;
+            cameraRotation.x += inputTempX;
+            cameraRotation.y -= inputTempY;
 
-        CaculateRecoilTime();
+            CaculateRecoilTime();
 
-        cameraRotation.x += currentRecoil.x;
-        cameraRotation.y -= currentRecoil.y;
+            cameraRotation.x += currentRecoil.x;
+            cameraRotation.y -= currentRecoil.y;
 
-        cameraRotation.y = Mathf.Clamp(cameraRotation.y, LimitY.x, LimitY.y);
+            cameraRotation.y = Mathf.Clamp(cameraRotation.y, LimitY.x, LimitY.y);
 
-        Mousecamera.rotation = Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0);
-        player.rotation = Quaternion.Euler(0,cameraRotation.x, 0);
+            Mousecamera.rotation = playerQuaternion * Quaternion.Euler(cameraRotation.y, cameraRotation.x, 0);
+            player.rotation = playerQuaternion * Quaternion.Euler(0, cameraRotation.x, 0);
+        }
     }
 
     private void CaculateRecoilTime()
