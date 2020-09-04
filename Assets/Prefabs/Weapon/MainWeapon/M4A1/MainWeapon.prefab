@@ -1635,6 +1635,7 @@ MonoBehaviour:
   currentAmmoCarried: 120
   FireRate: 600
   time: 0
+  damage: 30
   recoil: {x: 0, y: 0.2}
   controller: {fileID: 0}
   isReady: 0

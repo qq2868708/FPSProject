@@ -19919,12 +19919,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapn_Name: AK47
+  muzzlePoint: {fileID: 0}
+  muzzleParticle: {fileID: 0}
+  casingPoint: {fileID: 0}
+  casingParticle: {fileID: 0}
   ammoInMag: 30
   MaxAmmorCarried: 120
   currentAmmoInMag: 30
   currentAmmoCarried: 0
   FireRate: 600
   time: 0
+  damage: 50
   recoil: {x: 0, y: 0.5}
   controller: {fileID: 0}
   isReady: 0

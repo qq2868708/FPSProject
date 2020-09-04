@@ -19575,12 +19575,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapn_Name: Sniper
+  muzzlePoint: {fileID: 0}
+  muzzleParticle: {fileID: 0}
+  casingPoint: {fileID: 0}
+  casingParticle: {fileID: 0}
   ammoInMag: 1
   MaxAmmorCarried: 10
   currentAmmoInMag: 0
   currentAmmoCarried: 0
   FireRate: 60
   time: 0
+  damage: 120
   recoil: {x: 0, y: 3}
   controller: {fileID: 0}
   isReady: 0
