@@ -8,6 +8,8 @@ public enum WeaponType
     SpecialWeapon,
 }
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BoxCollider))]
 public class GunItem : Item
 {
     //这是武器的预设

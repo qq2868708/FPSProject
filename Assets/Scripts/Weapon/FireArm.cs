@@ -63,6 +63,16 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     //该手臂对应的武器，是一个可以在场景中显示的可以捡起的道具
     public GameObject prefab;
 
+    //配件挂载点
+    public Transform attachmentsHolder;
+    //配件相机
+    public Camera gunCamera;
+    public Vector3 originPosition;
+
+    //跟武器对应的图标
+    public Sprite sprite;
+
+
     //如果使用Instantiate方法，必须写在Awake里，有严格的调用时机的区别，instantiate中awake会立刻执行，而start会延迟执行，导致有些赋值无效
     private void Awake()
     {
@@ -82,6 +92,10 @@ public abstract class FireArm : MonoBehaviour,IWeapon
         muzzleParticle = TransformHelper.FindChild(this.transform, "Muzzle").GetComponent<ParticleSystem>();
         casingPoint = TransformHelper.FindChild(this.transform, "Casing Spawn Point");
         casingParticle= TransformHelper.FindChild(this.transform, "Casing").GetComponent<ParticleSystem>();
+        //获取相机的位置
+        attachmentsHolder = TransformHelper.FindChild(this.transform, "Attachments");
+        gunCamera = TransformHelper.FindChild(weaponHolder, "Gun Camera").GetComponent<Camera>();
+        originPosition = gunCamera.transform.localPosition;
     }
 
     //公开的抽象接口
@@ -147,8 +161,6 @@ public abstract class FireArm : MonoBehaviour,IWeapon
     {
 
     }
-
-   
 
     //根据相机的缩放产生一个散布，相机fov越大，散布越小
     protected Vector3 CaculateSpreadBullet()

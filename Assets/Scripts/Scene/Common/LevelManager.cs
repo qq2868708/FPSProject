@@ -28,8 +28,12 @@ public class LevelManager : MonoBehaviour
     public List<Text> texts;
     //显影速度
     public float speed;
-
+    //控制所有玩家的输入
     public bool gameStart;
+    //控制游戏暂停
+    public bool gamePause = false;
+    //开始界面之前不允许暂停等操作
+    private bool isStarting;
 
     private void Awake()
     {
@@ -62,6 +66,8 @@ public class LevelManager : MonoBehaviour
 
     public void InitPlayer()
     {
+        player = GameObject.Find("Player");
+        transformUI = GameObject.Find("LevelCanvas").transform;
         player.transform.position = playerStart.transform.position;
         player.GetComponentInChildren<FPSMouseLook>().playerQuaternion = playerStart.transform.rotation;
     }
@@ -69,11 +75,17 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        sceneID = int.Parse(SceneManager.GetActiveScene().name.Remove(0, 5));
+        isStarting = true;
+        //测试时注释，否则不能对单个场景进行调试
+        //sceneID = int.Parse(SceneManager.GetActiveScene().name.Remove(0, 5));
         yield return StartCoroutine(GameStart());
         //启用玩家控制
-        gameStart = true;
+        if(!gamePause)
+        {
+            gameStart = true;
+        }
         image.gameObject.SetActive(false);
+        isStarting = false;
     }
 
     public IEnumerator Victory()
@@ -98,6 +110,37 @@ public class LevelManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+    private void Update()
+    {
+        if(!isStarting)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                gamePause = !gamePause;
+                Pause(gamePause);
+            }
+        }
+    }
+
+    //运用场景异步加载的方式进行暂停界面的复用
+    public void Pause(bool gamePause)
+    {
+        if(gamePause)
+        {
+            SceneManager.LoadScene("Assets/Scenes/ScenePause/ScenePause.unity", LoadSceneMode.Additive);
+            gameStart = false;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            SceneManager.UnloadSceneAsync("Assets/Scenes/ScenePause/ScenePause.unity", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+            gameStart = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1;
+        }
+    }
+
     public void CheckVictory()
     {
         if(gameStart)
@@ -115,6 +158,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    //游戏开始
     public IEnumerator GameStart()
     {
         transformUI = GameObject.Find("LevelCanvas").transform;
@@ -134,9 +178,12 @@ public class LevelManager : MonoBehaviour
         while(true)
         {
             yield return null;
-            if(Input.anyKeyDown)
+            if(!gamePause)
             {
-                break;
+                if (!Input.GetKeyDown(KeyCode.Escape) && Input.anyKeyDown)
+                {
+                    break;
+                }
             }
         }
 
@@ -147,6 +194,7 @@ public class LevelManager : MonoBehaviour
         yield return FadeOut(image);   
     }
 
+    #region 角色胜利
     public IEnumerator GameVictory()
     {
         transformUI = GameObject.Find("LevelCanvas").transform;
@@ -177,7 +225,9 @@ public class LevelManager : MonoBehaviour
         }
         yield return FadeOut(image);
     }
+    #endregion
 
+    #region 角色死亡
     public IEnumerator GameDefeat()
     {
         transformUI = GameObject.Find("LevelCanvas").transform;
@@ -225,6 +275,7 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetString("NextScene", nextScene);
         SceneManager.LoadScene("Assets/Scenes/SceneLoading/SceneLoading.unity");
     }
+    #endregion
 
     public IEnumerator FadeIn(object obj)
     {

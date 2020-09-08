@@ -19597,6 +19597,10 @@ MonoBehaviour:
   SpreadAngle: 5
   weaponHolder: {fileID: 0}
   prefab: {fileID: 0}
+  attachmentsHolder: {fileID: 0}
+  gunCamera: {fileID: 0}
+  originPosition: {x: 0, y: 0, z: 0}
+  sprite: {fileID: 21300030, guid: dccc05b8d01dde54f88f9910329187c2, type: 3}
   clip: {fileID: 8300000, guid: 657f66f361dd0cc438866c411bf22a6e, type: 3}
 --- !u!1 &9125421661650344070
 GameObject:

@@ -8,6 +8,9 @@ namespace FPSProject.Character
     {
         public LevelManager instance;
 
+        public delegate void UpdatePlayerInfo();
+        public UpdatePlayerInfo updatePlayerInfo;
+
         private void Start()
         {
             instance = LevelManager.instance;
@@ -24,6 +27,10 @@ namespace FPSProject.Character
             if(currentHp<=0)
             {
                 instance.CheckVictory();
+            }
+            if(updatePlayerInfo!=null)
+            {
+                updatePlayerInfo.Invoke();
             }
         }
     }

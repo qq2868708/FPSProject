@@ -83,10 +83,10 @@ public class Inventory : MonoBehaviour
         //实例化武器对象，并扔出去
         var tmp = prefabsDic[weaponType];
         tmp = GameObjectPool.instance.CreateObject(tmp.name,tmp);
-        tmp.transform.SetParent(ItemCollector);
         tmp.transform.position = throwPoint.position;
         tmp.transform.rotation = throwPoint.rotation;
         tmp.GetComponent<Rigidbody>().AddForce(throwPoint.forward * 100);
+        tmp.gameObject.SetActive(true);
 
         tmp.GetComponent<GunItem>().currentInMag = fireArm.currentAmmoInMag;
         tmp.GetComponent<GunItem>().currentMagCarried = fireArm.currentAmmoCarried;
@@ -100,14 +100,12 @@ public class Inventory : MonoBehaviour
     {
         //实例化武器对象，并扔出去
         var tmp = GameObjectPool.instance.CreateObject(tmp_obj.name, tmp_obj);
-        tmp.transform.SetParent(ItemCollector);
         tmp.transform.position = throwPoint.position;
         tmp.transform.rotation = throwPoint.rotation;
+        tmp.gameObject.SetActive(true);
         tmp.GetComponent<Rigidbody>().AddForce(throwPoint.forward * 100);
-
         tmp.GetComponent<GunItem>().currentInMag = fireArm.currentAmmoInMag;
         tmp.GetComponent<GunItem>().currentMagCarried = fireArm.currentAmmoCarried;
-
     }
 
     //注册武器管理

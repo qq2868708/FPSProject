@@ -56,8 +56,8 @@ public class StartMenu : MonoBehaviour
         PlayerPrefs.SetString("NextScene", "Assets/Scenes/Scene01/Scene01.unity");
         //在后续场景中使用dbmanager管理数据库
         DbManager.appDBPath = appDBPath;
-        //统计游戏场景的数目
-        var count = SceneManager.sceneCountInBuildSettings-3;
+        //统计游戏场景的数目，将所有的非游戏场景放在列表的最前面，并减去
+        var count = SceneManager.sceneCountInBuildSettings-4;
         //Debug.Log(count);
         PlayerPrefs.SetInt("SceneCount", count);
     }
@@ -75,8 +75,6 @@ public class StartMenu : MonoBehaviour
         {
             SceneManager.LoadScene("Assets/Scenes/SceneLoading/SceneLoading.unity");
         }
-
-
     }
 
     //已有存档，仍然开始游戏

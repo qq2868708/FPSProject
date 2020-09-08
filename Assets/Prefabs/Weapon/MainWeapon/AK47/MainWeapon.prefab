@@ -19049,6 +19049,36 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1425261558849040144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2956113019372099368}
+  m_Layer: 8
+  m_Name: Attachments
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2956113019372099368
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425261558849040144}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2751922862357599304}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1852210396420443830
 GameObject:
   m_ObjectHideFlags: 0
@@ -19940,7 +19970,11 @@ MonoBehaviour:
   isAiming: 0
   SpreadAngle: 60
   weaponHolder: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 8522536467740039059, guid: 829ee6e10d6694b6cb349fc2c8081bf5, type: 3}
+  attachmentsHolder: {fileID: 0}
+  gunCamera: {fileID: 0}
+  originPosition: {x: 0, y: 0, z: 0}
+  sprite: {fileID: 21300000, guid: dccc05b8d01dde54f88f9910329187c2, type: 3}
 --- !u!114 &2748520902620672037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20021,6 +20055,7 @@ Transform:
   m_Children:
   - {fileID: 2751468047393886152}
   - {fileID: 2752064067256466476}
+  - {fileID: 2956113019372099368}
   m_Father: {fileID: 2751746548442177416}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

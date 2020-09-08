@@ -23,21 +23,15 @@ public class WeaponManager : MonoBehaviour
     public string specialWeaponStr = "SpecialWeapon";
 
     //管理所用可用武器，包括主，副武器，所有武器类型都会被注册但是武器可能不存在
-    [SerializeField]
-    private Dictionary<string, FireArm> weaponDict = new Dictionary<string, FireArm>();
-    //将武器和管理他们的transform建立关系，如果没有武器，就不在此字典注册
-    [SerializeField]
-    private Dictionary<FireArm, Transform> transformDic = new Dictionary<FireArm, Transform>();
-    [SerializeField]
-    private Dictionary<string, Transform> weaponTransform = new Dictionary<string, Transform>();
+    public Dictionary<string, FireArm> weaponDict = new Dictionary<string, FireArm>();
+    public Dictionary<FireArm, Transform> transformDic = new Dictionary<FireArm, Transform>();
+    public Dictionary<string, Transform> weaponTransform = new Dictionary<string, Transform>();
 
     //实际拥有的武器列表，全部非空
-    [SerializeField]
-    private List<string> weaponList = new List<string>();
+    public List<string> weaponList = new List<string>();
 
     //当前武器对象
-    [SerializeField]
-    private Transform currentWeaponTransform;
+    public Transform currentWeaponTransform;
     [SerializeField]
     private FireArm currentWeapon;
     //当前武器索引，用于鼠标滚轮切换武器
@@ -56,6 +50,10 @@ public class WeaponManager : MonoBehaviour
 
     //场景管理器，控制游戏流程
     public LevelManager instance;
+
+    //UI界面管理，该类提供一个事件供UI注册，要求UI提供跟武器相关的界面提示，如弹药，武器等
+    public delegate void UIUpdate();
+    public event UIUpdate UpdateUI;
 
     //做一些初始化的设置
     private void InitManager()
@@ -279,6 +277,9 @@ public class WeaponManager : MonoBehaviour
             {
                 DropWeapon();
             }
+
+            UpdateUI.Invoke();
+
         }
     }
 
@@ -353,7 +354,7 @@ public class WeaponManager : MonoBehaviour
     {
         //返回的是MainWeapon等的物体
         var newWeapon = GameObjectPool.instance.CreateObject(weaponName,gunType,gunPrefab);
-        Debug.Log(newWeapon.name);
+        //Debug.Log(newWeapon.name);
 
         //先把该武器调整到weaponholder下进行管理，再根据需求进行显影
         if (weaponTransform.ContainsKey(gunType))

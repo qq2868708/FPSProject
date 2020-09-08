@@ -33,3 +33,73 @@ MonoBehaviour:
     reloadLeft: {fileID: 8300000, guid: 2bd3464bb5afb704a89469a5ecf72ec5, type: 3}
     reloadOutof: {fileID: 8300000, guid: f73ce9d68f9e1ca4f9082ee1d1808ad5, type: 3}
     interval: 0
+  - name: Scar
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: fa137ae6327c2814a86677589e5b5e90, type: 3}
+    reloadOutof: {fileID: 8300000, guid: 6ea3f126624d1d34e988448241ce964b, type: 3}
+    interval: 0
+  - name: ShotGun01
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: 627283682cdb8784f9b8f4279751facf, type: 3}
+    reloadOutof: {fileID: 8300000, guid: 43d60630705c9c34c8a114be2f9fff0c, type: 3}
+    interval: 0
+  - name: SMG01
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: 1f1a075a6db00934ca52a35f678cf2ae, type: 3}
+    reloadOutof: {fileID: 8300000, guid: 56f219c78836e8f48be5fd51353aed5c, type: 3}
+    interval: 0
+  - name: SMG02
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: a1ff85f8e2a99d246aae454bcd37d903, type: 3}
+    reloadOutof: {fileID: 8300000, guid: 0744e8ff1f909324d80bd7dc366af370, type: 3}
+    interval: 0
+  - name: SMG03
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: 43f13be169940b748bb475704fb238d9, type: 3}
+    reloadOutof: {fileID: 8300000, guid: 4c0d859aadf7bb245ac35b62b5163dd7, type: 3}
+    interval: 0
+  - name: SMG04
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: d4e6ab2db8eedf247b8c757846157d44, type: 3}
+    reloadOutof: {fileID: 8300000, guid: 865a428069be2d44b971395902315f20, type: 3}
+    interval: 0
+  - name: SMG05
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: 5bff4e824d7ec1747a980129b3833cf3, type: 3}
+    reloadOutof: {fileID: 8300000, guid: fe1ecd03445d92840b4806863de7b73f, type: 3}
+    interval: 0
+  - name: HangGun02
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: b0d51244fd32fc647960320540b32f66, type: 3}
+    reloadOutof: {fileID: 8300000, guid: fee3a21f251a4914cabce25b13e7d2a8, type: 3}
+    interval: 0
+  - name: HandGun03
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: b0d51244fd32fc647960320540b32f66, type: 3}
+    reloadOutof: {fileID: 8300000, guid: fee3a21f251a4914cabce25b13e7d2a8, type: 3}
+    interval: 0
+  - name: HandGun04
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: b0d51244fd32fc647960320540b32f66, type: 3}
+    reloadOutof: {fileID: 8300000, guid: fee3a21f251a4914cabce25b13e7d2a8, type: 3}
+    interval: 0
+  - name: GrenadeLauncher
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: 32bdef70ae91e7a4d89ea2c6dc4b1d3d, type: 3}
+    reloadOutof: {fileID: 8300000, guid: 32bdef70ae91e7a4d89ea2c6dc4b1d3d, type: 3}
+    interval: 0
+  - name: RocketLauncher
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: 5e815e9bcf2d45b46b942b8f91b882e9, type: 3}
+    reloadOutof: {fileID: 8300000, guid: 5e815e9bcf2d45b46b942b8f91b882e9, type: 3}
+    interval: 0
+  - name: Sniper02
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: 1d1b8caf2311a4b4dab396ae6714adff, type: 3}
+    reloadOutof: {fileID: 8300000, guid: 8523e01835aca624a9828374ac81d7d7, type: 3}
+    interval: 0
+  - name: Sniper03
+    shootAudio: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+    reloadLeft: {fileID: 8300000, guid: 7768ee88e89dc754490e9b73bb7f33d1, type: 3}
+    reloadOutof: {fileID: 8300000, guid: 23f564544aac75340b820dbfb27ea183, type: 3}
+    interval: 0

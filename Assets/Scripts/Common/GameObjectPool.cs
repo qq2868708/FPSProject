@@ -120,7 +120,8 @@ public class GameObjectPool : MonoBehaviour
         //是否被对象池控制
         if(dict.ContainsKey(obj.name))
         {
-            dict[obj.name].Add(obj);
+            //obj.transform.parent = this.transform;
+            obj.SetActive(false);
         }
         else
         {

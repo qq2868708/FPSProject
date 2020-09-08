@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AssaultRifle : FireArm
 {
@@ -68,20 +69,59 @@ public class AssaultRifle : FireArm
         StartCoroutine(Scale());
     }
 
-    //相机缩放
+    //相机缩放，加入倍镜功能
     public IEnumerator Scale()
     {
         float tmp_vel = 0.1f;
+        ScopeItem scope=null;
+        for (int i=0;i<attachmentsHolder.childCount;i++)
+        {
+            if (attachmentsHolder.GetChild(i).gameObject.activeSelf==true&&attachmentsHolder.GetChild(i).GetComponent<ScopeItem>()!=null)
+            {
+                scope=attachmentsHolder.GetChild(i).GetComponent<ScopeItem>();
+                break;
+            }
+        }
         while(true)
         {
             yield return null;
-            if (isAiming)
+
+            if(scope!=null)
             {
-                eyeCamera.fieldOfView = Mathf.SmoothDamp(eyeCamera.fieldOfView, originalFOV - 26, ref tmp_vel, 0.8f);
+                if (isAiming)
+                {
+                    eyeCamera.fieldOfView = Mathf.SmoothDamp(eyeCamera.fieldOfView, originalFOV - 26-scope.eyeCameraFOV, ref tmp_vel, 0.3f);
+                }
+                else
+                {
+                    eyeCamera.fieldOfView = Mathf.SmoothDamp(eyeCamera.fieldOfView, originalFOV, ref tmp_vel, 0.3f);
+                }
             }
             else
             {
-                eyeCamera.fieldOfView = Mathf.SmoothDamp(eyeCamera.fieldOfView, originalFOV,  ref tmp_vel, 0.8f);
+                if (isAiming)
+                {
+                    eyeCamera.fieldOfView = Mathf.SmoothDamp(eyeCamera.fieldOfView, originalFOV - 26, ref tmp_vel, 0.3f);
+                }
+                else
+                {
+                    eyeCamera.fieldOfView = Mathf.SmoothDamp(eyeCamera.fieldOfView, originalFOV, ref tmp_vel, 0.3f);
+                }
+            }
+            
+
+            if(scope!=null)
+            {
+                if (isAiming)
+                {
+                    //gunCamera.transform.localPosition =new Vector3(gunCamera.transform.localPosition.x, Mathf.SmoothDamp(gunCamera.transform.localPosition.y, scope.gunTransform.y, ref tmp_vel, 0.8f), gunCamera.transform.localPosition.z);
+                    gunCamera.transform.localPosition = new Vector3(gunCamera.transform.localPosition.x, scope.gunTransform.y, gunCamera.transform.localPosition.z);
+                }
+                else
+                {
+                    //gunCamera.transform.localPosition = new Vector3(gunCamera.transform.localPosition.x, Mathf.SmoothDamp(gunCamera.transform.localPosition.y, originPosition.y, ref tmp_vel, 0.8f), gunCamera.transform.localPosition.z);
+                    gunCamera.transform.localPosition = new Vector3(gunCamera.transform.localPosition.x, originPosition.y, gunCamera.transform.localPosition.z);
+                }
             }
         }
         
@@ -92,6 +132,4 @@ public class AssaultRifle : FireArm
     {
         controller.playerAnimator.SetLayerWeight(2, weight);
     }
-    
-    
 }

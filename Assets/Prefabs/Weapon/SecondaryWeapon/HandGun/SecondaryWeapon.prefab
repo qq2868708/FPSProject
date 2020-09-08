@@ -1138,6 +1138,10 @@ MonoBehaviour:
   SpreadAngle: 40
   weaponHolder: {fileID: 0}
   prefab: {fileID: 8025444526789826456, guid: 84527d31a0017429b921fe642786b4db, type: 3}
+  attachmentsHolder: {fileID: 0}
+  gunCamera: {fileID: 0}
+  originPosition: {x: 0, y: 0, z: 0}
+  sprite: {fileID: 21300008, guid: dccc05b8d01dde54f88f9910329187c2, type: 3}
 --- !u!114 &3263440868549797020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,7 +2780,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8663946665277951391}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.914, z: 0.288}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
@@ -2785,7 +2789,7 @@ Transform:
   - {fileID: 8663946666324185869}
   m_Father: {fileID: 3261152955339935730}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &8663946665277951386
 MonoBehaviour:
   m_ObjectHideFlags: 0
