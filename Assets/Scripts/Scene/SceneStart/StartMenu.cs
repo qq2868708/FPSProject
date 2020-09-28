@@ -188,6 +188,10 @@ public class StartMenu : MonoBehaviour
     //点击存档开始游戏
     public void ContinueGame()
     {
+        if(activeToggle==null)
+        {
+            return;
+        }
         playerName = activeToggle.GetComponentInChildren<Text>().text;
         playerName = playerName.Split(' ')[0];
         PlayerPrefs.SetString("Player", playerName);

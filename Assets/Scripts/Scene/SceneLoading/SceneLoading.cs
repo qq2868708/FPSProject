@@ -19,7 +19,7 @@ public class SceneLoading : MonoBehaviour
         var nextSceneID = int.Parse(sceneIndex);
         if (nextSceneID > PlayerPrefs.GetInt("SceneCount"))
         {
-            PlayerPrefs.SetString("NextScene", "Assets / Scenes / SceneEnd / SceneEnd.unity");
+            PlayerPrefs.SetString("NextScene", "Assets/Scenes/SceneEnd/SceneEnd.unity");
         }
         loading = SceneManager.LoadSceneAsync(PlayerPrefs.GetString("NextScene"));
     }

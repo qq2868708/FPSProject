@@ -77,7 +77,7 @@ public class LevelManager : MonoBehaviour
     {
         isStarting = true;
         //测试时注释，否则不能对单个场景进行调试
-        //sceneID = int.Parse(SceneManager.GetActiveScene().name.Remove(0, 5));
+        sceneID = int.Parse(SceneManager.GetActiveScene().name.Remove(0, 5));
         yield return StartCoroutine(GameStart());
         //启用玩家控制
         if(!gamePause)
